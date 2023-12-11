@@ -1,15 +1,267 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>MOS Burgers</title>
-    <link rel="stylesheet" href="/css/styles.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-  </head>
-  <body>
-    
-    <script src="/js/app.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-  </body>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MOS Burgers App</title>
+  <link rel="stylesheet" href="/css/styles.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+</head>
+
+<body>
+  <!-- background -->
+  <div class="bg-responsive col-auto">
+    <div class="overlay-rectangle row-cols-auto">
+      <div class="bg-gradient oran"></div>
+      <h1 class="heading">MOS Burgers</h1>
+      <h6 class="moto">Happiness in every bite...</h6>
+
+      <!-- Cart button -->
+      <a href="#" class="cart-link" onclick="toggleCart()">
+        <img src="/images/cart.png" alt="Cart" id="cart-image">
+      </a>
+
+      <!-- Cart -->
+      <div class="cart-container" id="cart-container">
+        <!-- cart content here -->
+        <h3>Shopping Cart</h3>
+        <ul>
+          <!-- Cart items go here -->
+        </ul>
+      </div>
+
+      <!-- Vertical Navbar -->
+      <div class="vertical-navbar">
+        <a href="html/search.html" class="navbar-link">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          Search
+        </a>
+        <a href="#" class="navbar-link">
+          <i class="fa-solid fa-house-chimney"></i>
+          Home
+        </a>
+        <a href="#" class="navbar-link">
+          <i class="fa-solid fa-burger"></i>
+          Items
+        </a>
+        <a href="#" class="navbar-link">
+          <i class="fa-solid fa-users"></i>
+          Customers
+        </a>
+        <a href="#" class="navbar-link">
+          <i class="fa-solid fa-file-invoice"></i>
+          Reports
+        </a>
+      </div>
+
+      <!-- main dashboard -->
+      <div class="dashboard">
+        <!-- Food Menu -->
+        <!-- <div class="dashbord-title">
+          <a href="#">All</a>
+          <a href="#">Burgers</a>
+          <a href="#">Submarines</a>
+          <a href="#">Fries</a>
+          <a href="#">Pasta</a>
+          <a href="#">Chicken</a>
+          <a href="#">Beverages</a>
+        </div> -->
+
+        <div class="menu-tab-wp">
+          <div class="row">
+            <div class="col-lg-12 m-0">
+              <div class="menu-tab text-center">
+                <ul class="filters">
+                  <div class="filter-active">
+                    <li class="filter" data-filter=".All, .Burgers, .Submarines, .Fries, .Pasta, .Chicken, .Beverages">
+                      <img src="/images/all.png" alt="">
+                      All
+                    </li>
+                    <li class="filter" data-filter=".Burgers">
+                      <img src="/images/burger.png" alt="">
+                      Burgers
+                    </li>
+                    <li class="filter" data-filter=".Submarines">
+                      <img src="/images/hot-dog.png" alt="">
+                      Submarines
+                    </li>
+                    <li class="filter" data-filter=".Fries">
+                      <img src="/images/french-fries.png" alt="">
+                      Fries
+                    </li>
+                    <li class="filter" data-filter=".Pasta">
+                      <img src="/images/pasta.png" alt="">
+                      Pasta
+                    </li>
+                    <li class="filter" data-filter=".Chicken">
+                      <img src="/images/fried-chicken.png" alt="">
+                      Chicken
+                    </li>
+                    <li class="filter" data-filter=".Beverages">
+                      <img src="/images/beverage.png" alt="">
+                      Beverages
+                    </li>
+                  </div>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="menu-list-row">
+          <div class="row g-xxl-5 bydefault_show" id="menu-dish">
+
+            <!-- B1001 -->
+            <div class="col-lg-4 col-sm-6 dish-box-wp burger" data-cat="Burgers">
+              <div class="dish-box text-center">
+                <div class="dist-img">
+                  <img src="/images/Classic Burger (Large) .png" alt="">
+                </div>
+                <div class="dish-discount">0%
+                  <i class="fa-solid fa-star"></i>
+                </div>
+                <div class="dish-title">
+                  <h6 class="h6-title">Classic Burger (Large)</h6>
+                </div>
+                <div class="dish-info">
+                  <ul>
+                    <li>
+                      <p>code</p>
+                      <b>B1001</b>
+                    </li>
+                    <li>
+                      <p>stock</p>
+                      <b>7</b>
+                    </li>
+                  </ul>
+                </div>
+                <div class="dist-bottom-row">
+                  <ul>
+                    <li>
+                      <b>Rs. 750.00</b>
+                    </li>
+                    <li>
+                      <button class="dish-add-btn">
+                        <i class="fa-solid fa-circle-plus"></i>
+                      </button>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+
+            <!-- B1002 -->
+            <div class="col-lg-4 col-sm-6 dish-box-wp All" data-cat="All">
+              <div class="dish-box text-center">
+                <div class="dist-img">
+                  <img src="/images/Classic Burger (Regular) .png" alt="">
+                </div>
+                <div class="dish-discount">15%
+                  <i class="fa-solid fa-star"></i>
+                </div>
+                <div class="dish-title">
+                  <h6 class="h6-title">Classic Burger (Regular)</h6>
+                </div>
+                <div class="dish-info">
+                  <ul>
+                    <li>
+                      <p>code</p>
+                      <b>B1002</b>
+                    </li>
+                    <li>
+                      <p>stock</p>
+                      <b>6</b>
+                    </li>
+                  </ul>
+                </div>
+                <div class="dist-bottom-row">
+                  <ul>
+                    <li>
+                      <b>Rs. 1,500.00</b>
+                    </li>
+                    <li>
+                      <button class="dish-add-btn">
+                        <i class="fa-solid fa-circle-plus"></i>
+                      </button>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <!-- B1003 -->
+            <div class="col-lg-4 col-sm-6 dish-box-wp Burgers" data-cat="Burgers">
+              <div class="dish-box text-center">
+                <div class="dist-img">
+                  <img src="/images/Turkey Burger.png" alt="">
+                </div>
+                <div class="dish-discount">0%
+                  <i class="fa-solid fa-star"></i>
+                </div>
+                <div class="dish-title">
+                  <h6 class="h6-title">Turkey Burger</h6>
+                </div>
+                <div class="dish-info">
+                  <ul>
+                    <li>
+                      <p>code</p>
+                      <b>B1003</b>
+                    </li>
+                    <li>
+                      <p>stock</p>
+                      <b>8</b>
+                    </li>
+                  </ul>
+                </div>
+                <div class="dist-bottom-row">
+                  <ul>
+                    <li>
+                      <b>Rs. 1,600.00</b>
+                    </li>
+                    <li>
+                      <button class="dish-add-btn">
+                        <i class="fa-solid fa-circle-plus"></i>
+                      </button>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+
+
+
+
+
+
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+  </div>
+  <script src="/js/app.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mixitup@3.5.1/dist/mixitup.min.js"></script>
+</body>
+
 </html>
