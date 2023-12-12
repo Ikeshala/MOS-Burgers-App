@@ -56,6 +56,7 @@ body {
     color: var(--text-color);
     font-size: small;
     font-family: 'Kotta One', sans-serif;
+    margin-bottom: 1rem;
 }
 
 .vertical-navbar {
@@ -100,182 +101,68 @@ body {
 }
 
 .dashboard {
-    height: 100%;
+    height: max-content;
     width: 100%;
-    /* padding-right: 360px; */
-    padding-right: 10%;
+    padding-right: 200px;
+    padding-right: 5%;
     padding-left: 10%;
+    padding-top: 2%;
 }
 
-/* .dashbord-title {
-    align-items: center;
-    align-content: center;
-    display: flex;
-    gap: 10px;
-    padding: .3rem 1rem;
-    overflow-x: auto;
-}
-
-.dashbord-title a {
-    text-decoration: none;
-    font-family: 'Kavoon', sans-serif;
-    font-size: .9rem;
-    color: var(--main-color);
-    background-color: rgba(232, 114, 12, 0.2);
-    text-align: center;
-    border-radius: 20px;
-    min-width: 110px;
-    padding: .5rem 0;
-}
-
-.dashbord-title a:hover {
-    background: var(--secondry-color);
-    color: var(--second-text-color);
-} */
-
-.food-menu {
-    text-align: center;
-    margin-top: 20px;
-}
-
-.food-menu h3 {
-    color: var(--main-color);
-}
-
-.food-menu ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.food-menu li {
-    margin: 5px 0;
-}
-
-.cart-link {
-    position: absolute;
-    margin-right: 1%;
-    margin-top: 1%;
-    top: 10px;
-    right: 10px;
-    width: 8%;
-    height: 8%;
-}
-
-.cart-link img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 50%;
-}
-
-.cart-container {
-    display: none;
-    position: absolute;
-    top: 60px;
-    right: 10px;
-    width: 200px;
-    background-color: white;
-    padding: 10px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.cart-container h3 {
-    color: var(--main-color);
-}
-
-.cart-container ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.menu-tab-wp {
-    margin-bottom: 65px;
-}
-
-.menu-tab ul {
-    padding: 10px;
-    display: inline-block;
-    border-radius: 60px;
-    /* background: linear-gradient(145deg, #ececec, #ffffff); */
-    box-shadow: 28px 28px 10px #d4d4d4 -28px -28px 10px #ffffff;
-    position: relative;
-    z-index: 2;
-}
-
-.menu-tab ul li,
-.menu-tab ul .filter-active {
+.dashboad-menu {
     display: inline-flex;
-    text-transform: capitalize;
-    font-family: 'Kavoon', sans-serif;
+    gap: 40px;
+    /* padding: .3rem 0; */
+    overflow-x: auto;
+    border-radius: 50px;
+    background-color: rgba(232, 114, 12, 0.9);
+}
+
+.dashboad-menu a {
+    text-decoration: none;
+    text-align: center;
+    border-radius: 50px;
+    min-width: 125px;
+    padding: .5rem 0;
+    font-size: 18px;
     color: var(--second-text-color);
-    font-size: 16px;
-    line-height: normal;
+    font-family: 'Kavoon', sans-serif;
+}
+
+.dashboad-menu a:hover {
+    background-color: var(--second-text-color);
+    color: var(--secondry-color);
+}
+
+.dashboard-content {
+    display: block ruby;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)) !important;
+    gap: 20px;
+    padding: 2rem 1rem 1rem 1rem;
+    overflow-x: auto;
+    max-height: calc(100vh - 150px);
+}
+
+.dashboard-card {
+    background: linear-gradient(145deg, #ffffff, #ffdb63);
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px;
+    border-radius: 15px;
+    position: relative;
     cursor: pointer;
-    padding: 3px 12px;
-    border-radius: 30px;
-    transition: .3s;
-    justify-content: center;
-    align-items: center;
-}
-
-.filter-active {
-    position: relative;
-    left: 0;
-    min-height: 40px;
-    z-index: -1;
-}
-
-.menu-tab ul li img {
-    margin-right: 10px;
-    position: relative;
-    top: 1px;
-}
-
-.menu-tab ul .filter-active {
-    color: #ffffff;
-    background: linear-gradient(145deg, #53392C, #E8720C);
-}
-
-.menu-list-row .bydefault_show .dish-box-wp {
-    display: inline-block !important;
-    flex-wrap: inherit !important;
-}
-
-.menu-list-row {
-    left: auto;
-}
-
-.dish-box-wp {
-    display: none;
-}
-
-.dish-box {
-    border-radius: 30px;
-    background: linear-gradient(145deg, #ffdb63, #ffffff);
-    box-shadow: 16px 16px 45px #d4d4d4, -16px -16px 45px #ffffff;
-    display: flow-root;
-    padding: 0 0px 10px;
-    padding-top: 0;
-    margin: 10px 0 10px;
+    /* align-items: center; */
+    text-align: center;
     transition: 0.8s cubic-bezier(0.22, 0.78, 0.45, 1.02);
 }
 
-.dish-box:hover {
-    transform: scale(1.03);
+.dashboard-card:hover {
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px;
 }
 
-.dist-img {
-    margin-top: -50px;
-    margin-bottom: 5px;
-}
-
-.dist-img img {
-    box-shadow: 28px 28px 45px #e4e3e3, -28px -28px 45px #ffffff;
-    border-radius: 50%;
-    overflow: hidden;
+.card-image {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 15px;
 }
 
 .dish-discount {
@@ -374,24 +261,90 @@ body {
     border-radius: 20px;
     color: #ffffff;
     transition: 0.3s;
-    /* background: linear-gradient(145deg, #ffc954, #E8720C); */
-    /* box-shadow: inset 4px 4px 8px #d6a029, inset -4px -4px 8px #ffd837;  */
+    background: linear-gradient(145deg, #944507, #2c1103);
+    box-shadow: inset 4px 4px 8px #d6a029, inset -4px -4px 8px #2c1103;
 }
 
 .dish-add-btn i {
     color: var(--secondry-color);
-    /* font-size: 22px; */
 }
 
 .dish-add-btn:hover {
-    background: linear-gradient(145deg, #944507, #ffc933);
+    background: linear-gradient(145deg, #ffdb63, #2c1103);
 }
 
-.menu-scroll {
-    float: left;
-    width: auto;
-    overflow-y: auto;
-    height: auto;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.cart-link {
+    position: absolute;
+    margin-right: 1%;
+    margin-top: 1%;
+    top: 10px;
+    right: 10px;
+    width: 8%;
+    height: 8%;
+}
+
+.cart-link img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.cart-container {
+    display: none;
+    position: absolute;
+    top: 60px;
+    right: 10px;
+    width: 200px;
+    background-color: white;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.cart-container h3 {
+    color: var(--main-color);
+}
+
+.cart-container ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }
 
 
