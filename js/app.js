@@ -1,21 +1,27 @@
-$(document).ready(function ($) {
-    "use strict";
+document.addEventListener('DOMContentLoaded', function () {
+    const menuLinks = document.querySelectorAll('.dashboad-menu a');
+    const dashboardCards = document.querySelectorAll('.dashboard-card');
 
-    // Click event for menu tab items
-    $(".filters li").on("click", function () {
-        // Remove 'filter-active' class from all items
-        $(".filters li").removeClass("filter-active");
-        // Add 'filter-active' class to the clicked item
-        $(this).addClass("filter-active");
+    menuLinks.forEach(link => {
+        link.addEventListener('click', function (event) {
+            event.preventDefault();
 
-        // Get the category from the clicked item's data attribute
-        var category = $(this).data("filter");
+            const selectedCategory = this.textContent.toLowerCase().trim();
 
-        // Hide all items
-        $(".dish-box-wp").hide();
+            // Hide all cards initially
+            dashboardCards.forEach(card => {
+                card.style.display = 'none';
+            });
 
-        // Show only items with the selected category
-        $(".dish-box-wp[data-cat='" + category + "']").show();
+            // Display cards based on selected category
+            dashboardCards.forEach(card => {
+                const cardCategory = card.dataset.category.toLowerCase().trim();
+
+                if (selectedCategory === 'all' || selectedCategory === cardCategory) {
+                    card.style.display = 'block';
+                }
+            });
+        });
     });
 });
 
@@ -26,3 +32,5 @@ function toggleCart() {
     // Toggle the display property
     cartContainer.style.display = currentDisplayStyle === 'none' ? 'block' : 'none';
 }
+
+
