@@ -24,7 +24,7 @@ body {
 }
 
 .bg-responsive {
-    position: relative;
+    position: inherit;
     background-image: url('/images/home.png');
     background-size: cover;
     background-position: center;
@@ -33,7 +33,7 @@ body {
 }
 
 .overlay-rectangle {
-    position: absolute;
+    position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -47,7 +47,7 @@ body {
     font-family: 'Kavoon', sans-serif;
     font-size: xxx-large;
     color: var(--main-color);
-    padding-top: 2rem;
+    padding-top: 1rem;
     text-align: center;
 }
 
@@ -56,7 +56,6 @@ body {
     color: var(--text-color);
     font-size: small;
     font-family: 'Kotta One', sans-serif;
-    padding-bottom: .8rem;
 }
 
 .vertical-navbar {
@@ -66,7 +65,6 @@ body {
     left: 0;
     width: 10%;
     height: 100%;
-    /* background-color: rgba(195, 89, 8, 0.85); */
     background-color: rgba(232, 114, 12, 0.9);
     border-radius: 20px;
     display: flex;
@@ -97,10 +95,15 @@ body {
     margin-bottom: 5px;
 }
 
+.navbar-link i:hover {
+    color: var(--main-color);
+}
+
 .dashboard {
     height: 100%;
     width: 100%;
-    padding-right: 360px;
+    /* padding-right: 360px; */
+    padding-right: 10%;
     padding-left: 10%;
 }
 
@@ -189,7 +192,7 @@ body {
 }
 
 .menu-tab-wp {
-    margin-bottom: 30px;
+    margin-bottom: 65px;
 }
 
 .menu-tab ul {
@@ -238,6 +241,7 @@ body {
 
 .menu-list-row .bydefault_show .dish-box-wp {
     display: inline-block !important;
+    flex-wrap: inherit !important;
 }
 
 .menu-list-row {
@@ -293,7 +297,7 @@ body {
     margin-bottom: 2px;
     font-family: 'Kotta One', serif;
     font-weight: bold;
-    color: var(--main-color) ;
+    color: var(--main-color);
     transition: 0.3s;
     display: -webkit-box;
     -webkit-line-clamp: 2;
@@ -366,7 +370,7 @@ body {
 .dish-add-btn {
     width: 20px;
     height: 20px;
-    border:#53392C;
+    border: #53392C;
     border-radius: 20px;
     color: #ffffff;
     transition: 0.3s;
@@ -383,6 +387,12 @@ body {
     background: linear-gradient(145deg, #944507, #ffc933);
 }
 
+.menu-scroll {
+    float: left;
+    width: auto;
+    overflow-y: auto;
+    height: auto;
+}
 
 
 
