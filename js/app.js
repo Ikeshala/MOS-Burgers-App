@@ -25,6 +25,35 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
+
+function toggleSearch() {
+    var searchBar = document.getElementById('search-bar');
+    var currentDisplayStyle = window.getComputedStyle(searchBar).getPropertyValue('display');
+
+    //display property
+    searchBar.style.display = currentDisplayStyle === 'none' ? 'block' : 'none';
+}
+
+function searchItems() {
+    var searchInput = document.getElementById('search-input').value.toLowerCase().trim();
+    var dashboardCards = document.querySelectorAll('.dashboard-card');
+
+    dashboardCards.forEach(card => {
+        const cardTitle = card.querySelector('.h6-title').textContent.toLowerCase();
+        const cardCode = card.querySelector('.dish-info b').textContent.toLowerCase();
+
+        if (cardTitle.includes(searchInput) || cardCode.includes(searchInput)) {
+            card.style.display = 'block';
+        } else {
+            card.style.display = 'none';
+        }
+    });
+}
+
+
+
+
+
 function toggleCart() {
     var cartContainer = document.getElementById('cart-container');
     var currentDisplayStyle = window.getComputedStyle(cartContainer).getPropertyValue('display');

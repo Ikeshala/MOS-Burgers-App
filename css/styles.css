@@ -43,12 +43,17 @@ body {
     border-radius: 20px;
 }
 
+.bg-gradient {
+    position: relative;
+}
+
 .heading {
     font-family: 'Kavoon', sans-serif;
     font-size: xxx-large;
     color: var(--main-color);
     padding-top: 1rem;
     text-align: center;
+    margin-left: 20px;
 }
 
 .moto {
@@ -153,6 +158,7 @@ body {
     text-align: center;
     transition: 0.8s cubic-bezier(0.22, 0.78, 0.45, 1.02);
     width: 230px !important;
+    border: 1.5px dashed var(--text-color);
 }
 
 .dashboard-card:hover {
@@ -297,6 +303,35 @@ body {
 .dashboard-card:hover .expire-tooltip {
     display: block;
 }
+
+.search-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+#search-input {
+    margin-right: 10px;
+    background-color: transparent;
+    border: none;
+    border-bottom: 2px solid var(--main-color);
+    font-family: 'Jua', sans-serif;
+    color: var(--text-color);
+    outline: none;
+}
+
+.search-icon {
+    color: var(--main-color);
+}
+
+
+
 
 
 

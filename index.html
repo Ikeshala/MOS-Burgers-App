@@ -17,9 +17,8 @@
   <!-- background -->
   <div class="bg-responsive col-auto">
     <div class="overlay-rectangle row-cols-auto">
-      <div class="bg-gradient oran"></div>
-      <h1 class="heading">MOS Burgers</h1>
-      <h6 class="moto">Happiness in every bite...</h6>
+
+
 
       <!-- Cart button -->
       <a href="#" class="cart-link" onclick="toggleCart()">
@@ -37,7 +36,7 @@
 
       <!-- Vertical Navbar -->
       <div class="vertical-navbar">
-        <a href="html/search.html" class="navbar-link">
+        <a href="#" class="navbar-link" onclick="toggleSearch()">
           <i class="fa-solid fa-magnifying-glass"></i>
           Search
         </a>
@@ -59,8 +58,24 @@
         </a>
       </div>
 
+
+
       <!-- main dashboard -->
       <div class="dashboard">
+
+        <div class="bg-gradient oran">
+          <!-- Search bar -->
+          <div class="search-bar" id="search-bar" style="display: none;">
+            <input type="text" id="search-input" placeholder="Search by item code or name">
+            <!-- <button type="button" class="btn btn-warning" onclick="searchItems()">Warning</button> -->
+            <i class="fa-solid fa-magnifying-glass fa-beat-fade search-icon" onclick="searchItems()"></i>
+          </div>
+
+          <!-- title & moto -->
+          <h1 class="heading">MOS Burgers</h1>
+          <h6 class="moto">Happiness in every bite...</h6>
+        </div>
+
         <div class="dashboad-menu">
           <a href="#" class="menu-link">All</a>
           <a href="#" class="menu-link">Burgers</a>
@@ -150,7 +165,7 @@
 
           <!-- B1003 -->
           <div class="dashboard-card" data-category="pasta">
-            <img src="/images/Creamy Shrimp Pasta.jpg" alt="" class="card-image">
+            <img src="/images/Picsart_23-12-13_01-54-58-532.jpg" alt="" class="card-image">
             <div class="card-detail">
               <div class="dish-discount">15%
                 <i class="fa-solid fa-star"></i>
