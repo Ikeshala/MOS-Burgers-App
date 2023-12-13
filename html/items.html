@@ -4,44 +4,36 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
   <title>MOS Burgers App</title>
+
   <link rel="stylesheet" href="/css/styles.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-
+  <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+  <link rel="shortcut icon" href="/images/favicon_io/favicon.ico" type="image/x-icon" />
 </head>
 
 <body>
   <!-- background -->
   <div class="bg-responsive col-auto">
     <div class="overlay-rectangle row-cols-auto">
-      <div class="bg-gradient oran"></div>
-      <h1 class="heading">MOS Burgers</h1>
-      <h6 class="moto">Happiness in every bite...</h6>
 
-      <!-- Cart button -->
-      <a href="#" class="cart-link" onclick="toggleCart()">
-        <img src="/images/cart.png" alt="Cart" id="cart-image">
+      <!-- add items button -->
+      <a href="#" class="add-item" onclick="toggleCart()">
+        <img src="/images/add item.png" alt="Cart" id="add-item">
       </a>
-
-      <!-- Cart -->
-      <div class="cart-container" id="cart-container">
-        <!-- cart content here -->
-        <h3>Shopping Cart</h3>
-        <ul>
-          <!-- Cart items go here -->
-        </ul>
-      </div>
 
       <!-- Vertical Navbar -->
       <div class="vertical-navbar">
-        <a href="./search.html" class="navbar-link">
+        <a href="#" class="navbar-link" onclick="toggleSearch()">
           <i class="fa-solid fa-magnifying-glass"></i>
           Search
         </a>
-        <a href="../index.html" class="navbar-link">
+        <a href="/index.html" class="navbar-link">
           <i class="fa-solid fa-house-chimney"></i>
           Home
         </a>
@@ -49,15 +41,292 @@
           <i class="fa-solid fa-burger"></i>
           Items
         </a>
-        <a href="#" class="navbar-link">
+        <a href="/html/customers.html" class="navbar-link">
           <i class="fa-solid fa-users"></i>
           Customers
         </a>
-        <a href="#" class="navbar-link">
+        <a href="/html/reports.html" class="navbar-link">
           <i class="fa-solid fa-file-invoice"></i>
           Reports
         </a>
       </div>
+
+      <!-- item dashboard -->
+      <div class="item-dashboard">
+
+        <div class="bg-gradient oran">
+          <!-- Search bar -->
+          <div class="search-bar" id="search-bar" style="display: none;">
+            <input type="text" id="search-input" placeholder="Search by item code or name">
+            <!-- <button type="button" class="btn btn-warning" onclick="searchItems()">Warning</button> -->
+            <i class="fa-solid fa-magnifying-glass fa-beat-fade search-icon" onclick="searchItems()"></i>
+          </div>
+
+          <!-- title & moto -->
+          <h1 class="heading">MOS Burgers</h1>
+          <h6 class="moto">Happiness in every bite...</h6>
+        </div>
+
+        <div class="dashboad-title-bar">
+          <h4 class="h4-title">MOS Items</h4>
+        </div>
+
+        <div class="dashboard-content">
+          <!-- B1001 -->
+          <div class="dashboard-card" data-category="burgers">
+            <img src="/images/B1001.jpg" alt="" class="card-image">
+            <div class="card-detail">
+              <div class="dish-discount">0%
+                <i class="fa-solid fa-star"></i>
+              </div>
+              <div class="dish-title">
+                <h6 class="h6-title">Classic Burger (Large)</h6>
+              </div>
+              <div class="dish-info">
+                <ul>
+                  <li>
+                    <p>code</p>
+                    <b>B1001</b>
+                  </li>
+                  <li>
+                    <p>stock</p>
+                    <b>12</b>
+                  </li>
+                </ul>
+              </div>
+              <div class="dist-bottom-row">
+                <ul>
+                  <li>
+                    <b>Rs. 750.00</b>
+                  </li>
+                  <li>
+                    <button class="dish-add-btn">
+                      <i class="fa-solid fa-circle-plus"></i>
+                    </button>
+                  </li>
+                </ul>
+              </div>
+              <div class="expire-tooltip">Expires on: 23-Jan-12</div>
+            </div>
+          </div>
+
+          <!-- B1002 -->
+          <div class="dashboard-card" data-category="burgers">
+            <img src="/images/B1002.jpg" alt="" class="card-image">
+            <div class="card-detail">
+              <div class="dish-discount">15%
+                <i class="fa-solid fa-star"></i>
+              </div>
+              <div class="dish-title">
+                <h6 class="h6-title">Classic Burger (Regular)</h6>
+              </div>
+              <div class="dish-info">
+                <ul>
+                  <li>
+                    <p>code</p>
+                    <b>B1002</b>
+                  </li>
+                  <li>
+                    <p>stock</p>
+                    <b>6</b>
+                  </li>
+                </ul>
+              </div>
+              <div class="dist-bottom-row">
+                <ul>
+                  <li>
+                    <b>Rs. 1,500.00</b>
+                  </li>
+                  <li>
+                    <button class="dish-add-btn">
+                      <i class="fa-solid fa-circle-plus"></i>
+                    </button>
+                  </li>
+                </ul>
+              </div>
+              <div class="expire-tooltip">Expires on: 23-Jan-12</div>
+            </div>
+          </div>
+
+          <!-- B1044 -->
+          <div class="dashboard-card" data-category="beverages">
+            <img src="/images/Pepsi (330ml) .jpg" alt="" class="card-image">
+            <div class="card-detail">
+              <div class="dish-discount">5%
+                <i class="fa-solid fa-star"></i>
+              </div>
+              <div class="dish-title">
+                <h6 class="h6-title">Pepsi (330ml) </h6>
+              </div>
+              <div class="dish-info">
+                <ul>
+                  <li>
+                    <p>code</p>
+                    <b>B1044</b>
+                  </li>
+                  <li>
+                    <p>stock</p>
+                    <b>25</b>
+                  </li>
+                </ul>
+              </div>
+              <div class="dist-bottom-row">
+                <ul>
+                  <li>
+                    <b>Rs. 990.00</b>
+                  </li>
+                  <li>
+                    <button class="dish-add-btn">
+                      <i class="fa-solid fa-circle-plus"></i>
+                    </button>
+                  </li>
+                </ul>
+              </div>
+              <div class="expire-tooltip">Expires on: 23-Jun-14</div>
+            </div>
+          </div>
+
+          <!-- B1045 -->
+          <div class="dashboard-card" data-category="beverages">
+            <img src="/images/Coca-Cola (330ml) .jpg" alt="" class="card-image">
+            <div class="card-detail">
+              <div class="dish-discount">0%
+                <i class="fa-solid fa-star"></i>
+              </div>
+              <div class="dish-title">
+                <h6 class="h6-title">Coca-Cola (330ml)</h6>
+              </div>
+              <div class="dish-info">
+                <ul>
+                  <li>
+                    <p>code</p>
+                    <b>B1045</b>
+                  </li>
+                  <li>
+                    <p>stock</p>
+                    <b>30</b>
+                  </li>
+                </ul>
+              </div>
+              <div class="dist-bottom-row">
+                <ul>
+                  <li>
+                    <b>Rs. 1230.00</b>
+                  </li>
+                  <li>
+                    <button class="dish-add-btn">
+                      <i class="fa-solid fa-circle-plus"></i>
+                    </button>
+                  </li>
+                </ul>
+              </div>
+              <div class="expire-tooltip">Expires on: 23-May-02</div>
+            </div>
+          </div>
+
+          <!-- B1046 -->
+          <div class="dashboard-card" data-category="beverages">
+            <img src="/images/Sprite (330ml) .jpg" alt="" class="card-image">
+            <div class="card-detail">
+              <div class="dish-discount">3%
+                <i class="fa-solid fa-star"></i>
+              </div>
+              <div class="dish-title">
+                <h6 class="h6-title">Sprite (330ml)</h6>
+              </div>
+              <div class="dish-info">
+                <ul>
+                  <li>
+                    <p>code</p>
+                    <b>B1046</b>
+                  </li>
+                  <li>
+                    <p>stock</p>
+                    <b>23</b>
+                  </li>
+                </ul>
+              </div>
+              <div class="dist-bottom-row">
+                <ul>
+                  <li>
+                    <b>Rs. 1500.00</b>
+                  </li>
+                  <li>
+                    <button class="dish-add-btn">
+                      <i class="fa-solid fa-circle-plus"></i>
+                    </button>
+                  </li>
+                </ul>
+              </div>
+              <div class="expire-tooltip">Expires on: 23-Aug-22</div>
+            </div>
+          </div>
+
+          <!-- B1047 -->
+          <div class="dashboard-card" data-category="beverages">
+            <img src="/images/Mirinda (330ml) .jpg" alt="" class="card-image">
+            <div class="card-detail">
+              <div class="dish-discount">7%
+                <i class="fa-solid fa-star"></i>
+              </div>
+              <div class="dish-title">
+                <h6 class="h6-title">Mirinda (330ml)</h6>
+              </div>
+              <div class="dish-info">
+                <ul>
+                  <li>
+                    <p>code</p>
+                    <b>B1047</b>
+                  </li>
+                  <li>
+                    <p>stock</p>
+                    <b>21</b>
+                  </li>
+                </ul>
+              </div>
+              <div class="dist-bottom-row">
+                <ul>
+                  <li>
+                    <b>Rs. 850.00</b>
+                  </li>
+                  <li>
+                    <button class="dish-add-btn">
+                      <i class="fa-solid fa-circle-plus"></i>
+                    </button>
+                  </li>
+                </ul>
+              </div>
+              <div class="expire-tooltip">Expires on: 23-Sep-15</div>
+            </div>
+          </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+
+
+
+
+
+
+
+
+
+
+
     </div>
   </div>
   <script src="/js/app.js"></script>
