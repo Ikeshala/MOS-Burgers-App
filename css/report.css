@@ -1,0 +1,31 @@
+.report-dashboard {
+    height: max-content;
+    width: 100%;
+    padding-right: 3%;
+    padding-left: 10%;
+    padding-top: 2%;
+}
+
+.report-menu-bar {
+    display: inline-flex;
+    gap: 5px;
+    overflow-x: auto;
+    border-radius: 50px;
+    background-color: rgba(232, 114, 12, 0.9);
+}
+
+.report-menu-bar a {
+    text-decoration: none;
+    text-align: center;
+    border-radius: 50px;
+    min-width: 280px;
+    padding: .5rem 0;
+    font-size: 18px;
+    color: var(--second-text-color);
+    font-family: 'Kavoon', sans-serif;
+}
+
+.report-menu-bar a:hover {
+    background-color: var(--second-text-color);
+    color: var(--secondry-color);
+}

@@ -35,6 +35,7 @@ function toggleSearch() {
 function searchItems() {
     var searchInput = document.getElementById('search-input').value.toLowerCase().trim();
     var dashboardCards = document.querySelectorAll('.dashboard-card');
+    var found = false;
 
     dashboardCards.forEach(card => {
         const cardTitle = card.querySelector('.h6-title').textContent.toLowerCase();
@@ -42,10 +43,16 @@ function searchItems() {
 
         if (cardTitle.includes(searchInput) || cardCode.includes(searchInput)) {
             card.style.display = 'block';
+            found = true;
         } else {
             card.style.display = 'none';
         }
     });
+
+    if (!found) {
+        alert('Item not found!');
+        history.go(0);
+    }
 }
 
 //display cart-container click on cart-link & close cart-container click on close-cart function
