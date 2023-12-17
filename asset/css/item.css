@@ -1,4 +1,11 @@
 /* item section */
+:root {
+    --main-color: #53392C;
+    --secondry-color: #E8720C;
+    --text-color: #944507;
+    --second-text-color: #ededed;
+}
+
 .item-dashboard {
     height: max-content;
     width: 100%;
@@ -39,6 +46,15 @@
     border-color: var(--secondry-color);
 }
 
+.dashboard-content {
+    display: block ruby;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)) !important;
+    gap: 20px;
+    padding: 1.3rem 1rem 1rem 1rem;
+    overflow-x: auto;
+    max-height: calc(100vh - 150px);
+}
+
 .add-item {
     position: absolute;
     margin-right: 1%;
@@ -76,8 +92,8 @@
     font-family: 'Kotta One', sans-serif;
 }
 
-.add-item{
-    position: fixed;
+.add-item {
+    position: absolute;
     margin-right: 1%;
     margin-top: 1%;
     top: 10px;
@@ -108,9 +124,101 @@
     font-size: 20px;
 }
 
+.item-pic {
+    width: 70px !important;
+    height: 13px !important;
+    /* object-fit:fill; */
+    border-radius: 50%;
+}
 
+.dist-bottom-row {
+    font-size: 16px;
+    font-family: 'Jua', serif;
+    color: var(--main-color);
+    padding-top: 3px;
+}
 
+.dish-bottom-icon {
+    display: inline;
+    width: 20px;
+    height: 20px;
+    color: #ffffff;
+    transition: 0.3s;
+}
 
+.dish-bottom-icon i {
+    color: var(--main-color);
+    padding-bottom: .8rem;
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
+.modal-fade {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff; /* Set your desired background color */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Optional shadow effect */
+}
+
+.modal-header {
+    background: var(--secondry-color);
+    color: var(--second-text-color);
+    font-family: 'Kavoon', sans-serif;
+    font-size: 14px;
+}
+
+.modal-body form {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 0;
+    font-family: 'Kotta One', sans-serif;
+    font-size: 14px;
+}
+
+.modal-body form .imgHolder {
+    /* flex-basis: 32%;
+    height: 100%; */
+    width: 200px;
+    height: 200px;
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.modal-body form .input-field {
+    flex-basis: 68%;
+    border-left: 5PX groove var(--secondry-color);
+    padding-left: 20px;
+}
+
+.imgHolder .upload {
+    position: absolute;
+    display: block;
+    bottom: 0;
+    left: 10;
+    width: 100%;
+    height: 100px;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.upload i {
+    color: var(--secondry-color);
+    font-size: 45px;
+    align-items: center;
+    background: var(--second-text-color);
+    border-radius: 50%;
+}
+
+.imgHolder .upload input {
+    display: none;
+}
 
 
 

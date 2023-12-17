@@ -1,0 +1,60 @@
+:root {
+    --main-color: #53392C;
+    --secondry-color: #E8720C;
+    --text-color: #944507;
+    --second-text-color: #ededed;
+}
+
+.report-dashboard {
+    height: max-content;
+    width: 100%;
+    padding-right: 3%;
+    padding-left: 10%;
+    padding-top: 2%;
+}
+
+.report-menu-bar {
+    display: inline-flex;
+    gap: 5px;
+    overflow-x: auto;
+    border-radius: 50px;
+    background-color: rgba(232, 114, 12, 0.9);
+}
+
+.report-menu-bar a {
+    text-decoration: none;
+    text-align: center;
+    border-radius: 50px;
+    min-width: 280px;
+    padding: .5rem 0;
+    font-size: 18px;
+    color: var(--second-text-color);
+    font-family: 'Kavoon', sans-serif;
+}
+
+.report-menu-bar a:hover,
+.report-menu-bar a.active {
+    background-color: var(--second-text-color);
+    color: var(--secondry-color);
+}
+
+.table thead th {
+    background-color: rgba(232, 114, 12, 0.8);
+    color: var(--second-text-color);
+    font-weight: bolder;
+    border: 2px solid var(--second-text-color);
+    font-family: 'Kotta One', sans-serif;
+    font-size: 17px;
+}
+
+.table tr td {
+    vertical-align: middle;
+    color: var(--second-text-color);
+    background-color: rgba(232, 114, 12, 0.8);
+    font-weight: 500;
+    border-bottom: 1.5px solid var(--second-text-color);
+    border-top: 1.5px solid var(--second-text-color);
+    border-left: 2px solid var(--second-text-color);
+    border-right: 2px solid var(--second-text-color);
+    font-family: 'Kotta One', sans-serif;
+}

@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>MOS Burgers App</title>
+
+  <link rel="stylesheet" href="../asset/css/styles.css">
+  <link rel="stylesheet" href="../asset/css/item.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+  <link rel="shortcut icon" href="../asset/images/favicon_io/favicon.ico" type="image/x-icon" />
+</head>
+
+<body>
+  <!-- background -->
+  <div class="bg-responsive col-auto">
+    <div class="overlay-rectangle row-cols-auto">
+
+      <!-- add items button -->
+      <a href="#" class="add-item" data-bs-toggle="modal" data-bs-target="#add-form" onclick="toggleItem()"
+        id="add-item">
+        <img src="../asset/images/add item.png" alt="add" id="add-item-image">
+      </a>
+
+      <!-- Vertical Navbar -->
+      <div class="vertical-navbar">
+        <a href="#" class="navbar-link" onclick="toggleSearch()">
+          <i class="fa-solid fa-magnifying-glass fa-shake"></i>
+          Search
+        </a>
+        <a href="/index.html" class="navbar-link">
+          <i class="fa-solid fa-house-chimney fa-beat-fade"></i>
+          Home
+        </a>
+        <a href="/views/items.html" class="navbar-link">
+          <i class="fa-solid fa-burger fa-beat-fade"></i>
+          Items
+        </a>
+        <a href="/views/customers.html" class="navbar-link">
+          <i class="fa-solid fa-users fa-beat-fade"></i>
+          Customers
+        </a>
+        <a href="/views/reports.html" class="navbar-link">
+          <i class="fa-solid fa-file-invoice fa-beat-fade"></i>
+          Reports
+        </a>
+      </div>
+
+      <!-- item dashboard -->
+      <div class="item-dashboard">
+
+        <div class="header">
+          <!-- Search bar -->
+          <div class="search-bar" id="search-bar" style="display: none;">
+            <input type="text" id="search-input" placeholder="Search by item code or name">
+            <i class="fa-solid fa-magnifying-glass fa-beat-fade search-icon" onclick="searchItems()"></i>
+          </div>
+
+          <!-- title & moto -->
+          <h1 class="heading">MOS Burgers</h1>
+          <h6 class="moto">Happiness in every bite...</h6>
+        </div>
+
+        <div class="dashboad-title-bar">
+          <h4 class="h4-title">MOS Items</h4>
+        </div>
+
+        <div class="dashboard-content">
+          <!-- B1047 -->
+          <div class="dashboard-card" data-category="beverages">
+            <img src="../asset/images/Mirinda (330ml) .jpg" alt="" class="card-image">
+            <div class="card-detail">
+              <div class="dish-discount">7%
+                <i class='bx bxs-discount bx-tada'></i>
+              </div>
+              <div class="dish-title">
+                <h6 class="h6-title">Mirinda (330ml)</h6>
+              </div>
+              <div class="dish-info">
+                <ul>
+                  <li>
+                    <p>code</p>
+                    <b>B1047</b>
+                  </li>
+                  <li>
+                    <p>stock</p>
+                    <b>21</b>
+                  </li>
+                </ul>
+              </div>
+              <div class="dist-bottom-row">
+                Rs. 850.00
+              </div>
+              <div class="dish-bottom-icon">
+                <i class="fa-solid fa-pen-to-square fa-fade"></i>
+                <i class="fa-solid fa-trash-can fa-fade"></i>
+              </div>
+              <div class="expire-tooltip">Expires on: 23-Sep-15</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- item-add-pop-up-form -->
+      <div id="add-form" class="modal-fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+          <div class="modal-content">
+
+            <div class="modal-header">
+              <h4 class="modal-title">Add Item</h4>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body">
+
+              <form action="#" id="add-item-form">
+                <div class="card imgHolder">
+                  <label for="imgInput" class="upload">
+                    <input type="file" name="" id="imgInput">
+                    <i class="fa-solid fa-circle-plus"></i>
+                  </label>
+                  <img src="../asset/images/add item img.jpg" alt="" width="200" height="200">
+                </div>
+
+                <div class="input-field">
+                  <div class="code-section">
+                    <label for="item-code">Item Code :</label>
+                    <input type="text" id="item-code-input">
+                  </div>
+                  <div class="item-section">
+                    <label for="item-name">Item Name :</label>
+                    <input type="text" id="item-name-input">
+                  </div>
+                  <label for="select-dropdown">Category :</label>
+                  <select id="category-dropdown" name="category">
+                    <option value="" disabled selected>Select a category</option>
+                    <option value="burgers">Burgers</option>
+                    <option value="submarines">Submarines</option>
+                    <option value="fries">Fries</option>
+                    <option value="pasta">Pasta</option>
+                    <option value="chicken">Chicken</option>
+                    <option value="beverages">Beverages</option>
+                  </select>
+                  <div class="qty-section">
+                    <label for="qty">Quantity :</label>
+                    <input type="number" id="quantity-input">
+                  </div>
+                  <div class="price-section">
+                    <label for="price">Price (LKR) :</label>
+                    <input type="text" id="price-input">
+                  </div>
+                  <div class="discount-section">
+                    <label for="discount">Discount :</label>
+                    <input type="number" id="discount-input">
+                  </div>
+                  <div class="expire-date-section">
+                    <label for="expire-date">Expire Date :</label>
+                    <input type="date" id="expire-date-input">
+                  </div>
+
+                </div>
+              </form>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+  </div>
+  <script src="../asset/js/app.js"></script>
+  <script src="../asset/js/item.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mixitup@3.5.1/dist/mixitup.min.js"></script>
+</body>
+
+</html>
