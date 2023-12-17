@@ -67,3 +67,25 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 });
+
+// Show/Hide the modal and background overlay
+function displayModal() {
+    document.getElementById('overlay').style.display = 'block';
+
+    var middleModalElement = document.getElementById('addItemModal');
+    var middleModal = new bootstrap.Modal(middleModalElement);
+
+    var closeButton = middleModalElement.querySelector('.btn-close');
+    closeButton.addEventListener('click', function () {
+
+        setTimeout(function () {
+            document.getElementById('overlay').style.display = 'none';
+
+            middleModal.hide();
+        });
+    });
+
+    middleModal.show();
+}
+
+
