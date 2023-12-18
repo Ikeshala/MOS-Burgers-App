@@ -73,7 +73,7 @@
 
         <div class="dashboard-content" id="dashboard-content">
           <!-- B1047 -->
-          <div class="dashboard-card" data-category="beverages">
+          <!-- <div class="dashboard-card" data-category="beverages">
             <img src="../asset/images/Mirinda (330ml) .jpg" alt="" class="card-image">
             <div class="card-detail">
               <div class="dish-discount">7%
@@ -99,12 +99,12 @@
                 <div class="dish-bottom-icon">
                   <i class="fa-solid fa-pen-to-square fa-fade" data-bs-toggle="modal"
                     data-bs-target="#readDataModal"></i>
-                  <i class="fa-solid fa-trash-can fa-fade" data-bs-toggle="modal"></i>
+                    <i class="fa-solid fa-trash-can fa-fade delete-icon" data-item-id="${item.itemId}" data-bs-toggle="modal" data-bs-target="#deleteConfirmationModal"></i>
                 </div>
               </div>
               <div class="expire-tooltip">Expires on: 23-Sep-15</div>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
 
@@ -188,7 +188,7 @@
             </div>
             <div class="modal-body">
 
-              <form action="#" id="add-item-form">
+              <form action="#" id="read-data-form">
                 <div class="card imgHolder">
                   <label for="imgInput" class="upload">
                     <input type="file" name="" id="imgInput" style="display: none;" onchange="displaySelectedImage()">
