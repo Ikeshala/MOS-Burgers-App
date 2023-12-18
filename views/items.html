@@ -24,7 +24,7 @@
     <div class="overlay-rectangle row-cols-auto">
 
       <!-- add items button -->
-      <a href="#" class="add-item" onclick="displayModal()" id="add-item">
+      <a href="#" class="add-item" id="add-item-link">
         <img src="../asset/images/add item.png" alt="add" id="add-item-image">
       </a>
 
@@ -71,7 +71,7 @@
           <h4 class="h4-title">MOS Items</h4>
         </div>
 
-        <div class="dashboard-content">
+        <div class="dashboard-content" id="dashboard-content">
           <!-- B1047 -->
           <div class="dashboard-card" data-category="beverages">
             <img src="../asset/images/Mirinda (330ml) .jpg" alt="" class="card-image">
@@ -99,7 +99,7 @@
                 <div class="dish-bottom-icon">
                   <i class="fa-solid fa-pen-to-square fa-fade" data-bs-toggle="modal"
                     data-bs-target="#readDataModal"></i>
-                  <i class="fa-solid fa-trash-can fa-fade" data-bs-toggle="modal" data-bs-target="#readDataModal"></i>
+                  <i class="fa-solid fa-trash-can fa-fade" data-bs-toggle="modal"></i>
                 </div>
               </div>
               <div class="expire-tooltip">Expires on: 23-Sep-15</div>
@@ -172,7 +172,7 @@
 
             </div>
             <div class="modal-footer">
-              <button type="submit" class="save-btn-style submit" form="add-item-form">Add Item</button>
+              <button type="submit" class="save-btn-style add" form="add-item-form">Add Item</button>
             </div>
           </div>
         </div>
@@ -187,11 +187,16 @@
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
+
               <form action="#" id="add-item-form">
                 <div class="card imgHolder">
-                  <img src="../asset/images/add item img.jpg" alt="add_item_here" width="150" height="150">
+                  <label for="imgInput" class="upload">
+                    <input type="file" name="" id="imgInput" style="display: none;" onchange="displaySelectedImage()">
+                    <i class="fa-solid fa-circle-plus"></i>
+                  </label>
+                  <img src="../asset/images/add item img.jpg" alt="add_item_here" width="250" height="150" class="img"
+                    id="previewImage">
                 </div>
-
                 <div class="input-field">
                   <div class="code-section">
                     <label for="item-code">Item Code :</label>
@@ -232,6 +237,7 @@
                   </div>
                 </div>
               </form>
+
             </div>
           </div>
         </div>
@@ -296,7 +302,6 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
     crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mixitup@3.5.1/dist/mixitup.min.js"></script>
 </body>
 
 </html>

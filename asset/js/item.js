@@ -1,134 +1,157 @@
-//display item-container click on add-item & close item-container click on close-cart function
-document.addEventListener('DOMContentLoaded', function () {
-    document.getElementById('add-item').addEventListener('click', function (event) {
-        event.preventDefault();
+var form = document.getElementById("add-item-form");
+var imgInput = document.getElementById("imgInput");
+var previewImage = document.getElementById("previewImage");
 
-        var cartContainer = document.querySelector('.item-container');
-        var closeButton = document.getElementById('close-cart');
-
-        if (cartContainer.style.display === 'none' || cartContainer.style.display === '') {
-            cartContainer.style.display = 'block';
-            closeButton.style.display = 'block';
-        } else {
-            cartContainer.style.display = 'none';
-            closeButton.style.display = 'none';
-        }
-    });
-
-    document.getElementById('close-cart').addEventListener('click', function () {
-        var cartContainer = document.querySelector('.item-container');
-        var closeButton = document.getElementById('close-cart');
-
-        cartContainer.style.display = 'none';
-        closeButton.style.display = 'none';
-
-        history.go(0);
-    });
-});
-
-// Adjust the size of the dashboard based on the item-container's active state
-document.addEventListener('DOMContentLoaded', function () {
-    var cartContainer = document.querySelector('.item-container');
-    var closeButton = document.getElementById('close-cart');
-    var dashboard = document.querySelector('.dashboard');
-    var dashboardMenu = document.querySelector('.dashboad-menu');
-
-    document.getElementById('add-item').addEventListener('click', function (event) {
-        event.preventDefault();
-
-        cartContainer.classList.toggle('active');
-        closeButton.style.display = cartContainer.classList.contains('active') ? 'block' : 'none';
-        dashboard.style.width = cartContainer.classList.contains('active') ? 'calc(100% - 340px)' : '100%';
-        dashboardMenu.style.width = cartContainer.classList.contains('active') ? 'calc(100%)' : '100%';
-
-        if (!cartContainer.classList.contains('active')) {
-            cartContainer.style.display = 'none';
-        } else {
-            cartContainer.style.display = 'block';
-        }
-    });
-
-    document.getElementById('close-cart').addEventListener('click', function () {
-        cartContainer.classList.remove('active');
-        closeButton.style.display = 'none';
-        dashboard.style.width = '100%';
-        dashboardMenu.style.width = '100%';
-        history.go(0);
-    });
-
-    var navbarLinks = document.querySelectorAll('.navbar-link');
-    navbarLinks.forEach(link => {
-        link.addEventListener('click', function () {
-            cartContainer.classList.remove('active');
-            closeButton.style.display = 'none';
-            dashboard.style.width = '100%';
-            dashboardMenu.style.width = '100%';
-            cartContainer.style.display = 'none';
-        });
-    });
-});
-
-// Show/Hide the modal and background overlay
 function displayModal() {
-    document.getElementById('overlay').style.display = 'block';
+    const overlay = document.getElementById('overlay');
+    overlay.style.display = 'block';
 
-    var middleModalElement = document.getElementById('addItemModal');
-    var middleModal = new bootstrap.Modal(middleModalElement);
+    const addItemModal = new bootstrap.Modal(document.getElementById('addItemModal'));
 
-    var closeButton = middleModalElement.querySelector('.btn-close');
-    closeButton.addEventListener('click', function () {
+    addItemModal.show();
 
-        document.getElementById('overlay').style.display = 'none';
-        middleModal.hide();
-        history.go(0);
+    addItemModal._element.addEventListener('shown.bs.modal', function () {
+        const addItemButton = document.getElementById('add-item');
+
+        if (addItemButton) {
+            addItemButton.addEventListener('click', function () {
+                addItem();
+            });
+        }
     });
 
-    middleModal.show();
+    const closeButton = addItemModal._element.querySelector('.btn-close');
+    closeButton.addEventListener('click', function () {
+        overlay.style.display = 'none';
+        addItemModal.hide();
+    });
 }
 
-var form = document.getElementById("add-item-form"),
-    imgInput = document.getElementById("imgInput"),
-    previewImage = document.getElementById("previewImage"),
-    itemCode = document.getElementById("item-code-input"),
-    itemName = document.getElementById("item-name-input"),
-    categoryDropdown = document.getElementById("category-dropdown"),
-    qty = document.getElementById("quantity-input"),
-    price = document.getElementById("price-input"),
-    discount = document.getElementById("discount-input"),
-    expireDate = document.getElementById("expire-date-input"),
-    submitBtn = document.querySelector(".submit"),
-    itemInfo = document.getElementById("dashboard-content"),
-    modal = document.getElementById("userForm"),
-    modalTitle = document.querySelector("#userForm .modal-title"),
-    newUserBtn = document.querySelector(".newUser");
+function addItem() {
+    var itemsData = [];
 
-let getData = localStorage.getItem('foodIitem') ? JSON.parse(localStorage.getItem('foodIitem')) : [];
+    const itemCode = document.getElementById('item-code-input').value;
+    const itemName = document.getElementById('item-name-input').value;
+    const category = document.getElementById('category-dropdown').value;
+    const quantity = document.getElementById('quantity-input').value;
+    const price = document.getElementById('price-input').value;
+    const discount = document.getElementById('discount-input').value;
+    const expireDate = document.getElementById('expire-date-input').value;
 
-let isEdit = false, editId;
+    const itemId = generateUniqueId();
 
-function showInfo() { }
+    const newItem = {
+        itemId: itemId,
+        codeOfItem: itemCode,
+        nameOfItem: itemName,
+        categoryOfItem: category,
+        quantityOfItem: quantity,
+        priceOfItem: price,
+        discountOfItem: discount,
+        expireDateOfItem: expireDate,
+        picture: (previewImage.src && previewImage.src !== "undefined") ? previewImage.src : "../asset/images/add item img.jpg" // Include the 'picture' property
+    };
 
-newUserBtn.addEventListener('click', () => {
-    submitBtn.innerText = 'Submit';
-    modalTitle.innerText = "Fill the Form";
-    isEdit = false;
-    previewImage.src = "../asset/images/add item img.jpg";
+    itemsData.push(newItem);
+
+    displayItems(itemsData);
+
     form.reset();
-});
+    previewImage.src = "../asset/images/add item img.jpg";
 
+    const addItemModal = new bootstrap.Modal(document.getElementById('addItemModal'));
+    addItemModal.hide();
+}
 
-// display of loaded images in the pop-up view
-function displaySelectedImage() {
+function displayItems(itemsData) {
+    const dashboardContent = document.getElementById('dashboard-content');
+    if (!dashboardContent) {
+        console.error("Dashboard content element not found!");
+        return;
+    }
+
+    // dashboardContent.innerHTML = '';
+
+    itemsData.forEach(item => {
+        const card = document.createElement('div');
+        card.className = 'dashboard-card';
+        card.setAttribute('data-category', item.categoryOfItem);
+
+        card.innerHTML = `
+        <img src="${item.picture}" alt="" class="card-image"> <!-- Use the 'picture' property for the image source -->
+        <div class="card-detail">
+          <div class="dish-discount">${item.discountOfItem}%
+            <i class='bx bxs-discount bx-tada'></i>
+          </div>
+          <div class="dish-title">
+            <h6 class="h6-title">${item.nameOfItem}</h6>
+          </div>
+          <div class="dish-info">
+            <ul>
+              <li>
+                <p>code</p>
+                <b>${item.codeOfItem}</b>
+              </li>
+              <li>
+                <p>stock</p>
+                <b>${item.quantityOfItem}</b>
+              </li>
+            </ul>
+          </div>
+          <div class="dist-bottom-row">
+            Rs. ${item.priceOfItem}
+            <div class="dish-bottom-icon">
+              <i class="fa-solid fa-pen-to-square fa-fade" data-bs-toggle="modal" data-bs-target="#readDataModal"></i>
+              <i class="fa-solid fa-trash-can fa-fade" data-bs-toggle="modal" data-bs-target="#readDataModal"></i>
+            </div>
+          </div>
+          <div class="expire-tooltip">Expires on: ${item.expireDateOfItem}</div>
+        </div>
+      `;
+
+        dashboardContent.appendChild(card);
+    });
+}
+
+document.getElementById('add-item-link').addEventListener('click', displayModal);
+
+imgInput.addEventListener('change', () => {
     if (imgInput.files[0].size < 1000000) {
         var fileReader = new FileReader();
 
         fileReader.onload = function (e) {
             var imgUrl = e.target.result;
-            previewImage.src = imgUrl;
+            previewImage.setAttribute('src', imgUrl);
         };
 
         fileReader.readAsDataURL(imgInput.files[0]);
     } else {
         alert("This file is too large!");
     }
+});
+
+form.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    addItem(); // Call the addItem function directly
+});
+
+function displaySelectedImage() {
+    if (imgInput.files[0].size < 1000000) {
+        var fileReader = new FileReader();
+
+        fileReader.onload = function (e) {
+            var imgUrl = e.target.result;
+            previewImage.setAttribute('src', imgUrl);
+        };
+
+        fileReader.readAsDataURL(imgInput.files[0]);
+    } else {
+        alert("This file is too large!");
+    }
+}
+
+// Generate unique ID function (you can replace it with your own logic)
+function generateUniqueId() {
+    return '_' + Math.random().toString(36).substr(2, 9);
 }
