@@ -88,4 +88,47 @@ function displayModal() {
     middleModal.show();
 }
 
+var form = document.getElementById("add-item-form"),
+    imgInput = document.getElementById("imgInput"),
+    previewImage = document.getElementById("previewImage"),
+    itemCode = document.getElementById("item-code-input"),
+    itemName = document.getElementById("item-name-input"),
+    categoryDropdown = document.getElementById("category-dropdown"),
+    qty = document.getElementById("quantity-input"),
+    price = document.getElementById("price-input"),
+    discount = document.getElementById("discount-input"),
+    expireDate = document.getElementById("expire-date-input"),
+    submitBtn = document.querySelector(".submit"),
+    itemInfo = document.getElementById("dashboard-content"),
+    modal = document.getElementById("userForm"),
+    modalTitle = document.querySelector("#userForm .modal-title"),
+    newUserBtn = document.querySelector(".newUser");
 
+let getData = localStorage.getItem('foodIitem') ? JSON.parse(localStorage.getItem('foodIitem')) : [];
+
+let isEdit = false, editId;
+
+function showInfo() { }
+
+newUserBtn.addEventListener('click', () => {
+    submitBtn.innerText = 'Submit';
+    modalTitle.innerText = "Fill the Form";
+    isEdit = false;
+    previewImage.src = "../asset/images/add item img.jpg";
+    form.reset();
+});
+
+function displaySelectedImage() {
+    if (imgInput.files[0].size < 1000000) {
+        var fileReader = new FileReader();
+
+        fileReader.onload = function (e) {
+            var imgUrl = e.target.result;
+            previewImage.src = imgUrl;
+        };
+
+        fileReader.readAsDataURL(imgInput.files[0]);
+    } else {
+        alert("This file is too large!");
+    }
+}
