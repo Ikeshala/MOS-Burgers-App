@@ -78,11 +78,9 @@ function displayModal() {
     var closeButton = middleModalElement.querySelector('.btn-close');
     closeButton.addEventListener('click', function () {
 
-        setTimeout(function () {
-            document.getElementById('overlay').style.display = 'none';
-
-            middleModal.hide();
-        });
+        document.getElementById('overlay').style.display = 'none';
+        middleModal.hide();
+        history.go(0);
     });
 
     middleModal.show();
@@ -118,6 +116,8 @@ newUserBtn.addEventListener('click', () => {
     form.reset();
 });
 
+
+// display of loaded images in the pop-up view
 function displaySelectedImage() {
     if (imgInput.files[0].size < 1000000) {
         var fileReader = new FileReader();
