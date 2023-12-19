@@ -98,8 +98,9 @@
                 Rs. 850.00
                 <div class="dish-bottom-icon">
                   <i class="fa-solid fa-pen-to-square fa-fade" data-bs-toggle="modal"
-                    data-bs-target="#readDataModal"></i>
-                    <i class="fa-solid fa-trash-can fa-fade delete-icon" data-item-id="${item.itemId}" data-bs-toggle="modal" data-bs-target="#deleteConfirmationModal"></i>
+                    data-bs-target="#updateDataModal"></i>
+                  <i class="fa-solid fa-trash-can fa-fade delete-icon" data-item-id="${item.itemId}"
+                    data-bs-toggle="modal" data-bs-target="#deleteConfirmationModal"></i>
                 </div>
               </div>
               <div class="expire-tooltip">Expires on: 23-Sep-15</div>
@@ -169,7 +170,6 @@
                   </div>
                 </div>
               </form>
-
             </div>
             <div class="modal-footer">
               <button type="submit" class="save-btn-style add" form="add-item-form">Add Item</button>
@@ -178,66 +178,68 @@
         </div>
       </div>
 
-      <!-- read data modal -->
-      <div class="modal" tabindex="-1" id="readDataModal">
+      <!-- update data modal -->
+      <div class="modal" tabindex="-1" id="updateDataModal">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title">Item</h5>
+              <h5 class="modal-title">Update Item</h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
 
-              <form action="#" id="read-data-form">
+              <form action="#" id="update-data-form">
                 <div class="card imgHolder">
                   <label for="imgInput" class="upload">
-                    <input type="file" name="" id="imgInput" style="display: none;" onchange="displaySelectedImage()">
+                    <input type="file" name="" id="update-imgInput" style="display: none;" onchange="displaySelectedImage()">
                     <i class="fa-solid fa-circle-plus"></i>
                   </label>
-                  <img src="../asset/images/add item img.jpg" alt="add_item_here" width="250" height="150" class="img"
-                    id="previewImage">
+                  <img src="../asset/images/add item img.jpg" alt="previewImage" width="250" height="150" class="img"
+                    id="update-previewImage">
                 </div>
                 <div class="input-field">
                   <div class="code-section">
                     <label for="item-code">Item Code :</label>
-                    <input type="text" id="item-code-input" disabled>
+                    <input type="text" id="update-item-code-input">
                   </div>
                   <div class="item-section">
                     <label for="item-name">Item Name :</label>
-                    <input type="text" id="item-name-input" disabled>
+                    <input type="text" id="update-item-name-input">
                   </div>
                   <div class="dropdown-section">
                     <label for="select-dropdown">Category :</label>
-                    <select id="category-dropdown" name="category">
+                    <select id="update-category-dropdown" name="category">
                       <option value="" disabled selected>Select a category</option>
-                      <option value="burgers" disabled selected>Burgers</option>
-                      <option value="submarines" disabled selected>Submarines</option>
-                      <option value="fries" disabled selected>Fries</option>
-                      <option value="pasta" disabled selected>Pasta</option>
-                      <option value="chicken" disabled selected>Chicken</option>
-                      <option value="beverages" disabled selected>Beverages</option>
+                      <option value="burgers" selected>Burgers</option>
+                      <option value="submarines" selected>Submarines</option>
+                      <option value="fries" selected>Fries</option>
+                      <option value="pasta" selected>Pasta</option>
+                      <option value="chicken" selected>Chicken</option>
+                      <option value="beverages" selected>Beverages</option>
                     </select>
                   </div>
 
                   <div class="qty-section">
                     <label for="qty">Quantity :</label>
-                    <input type="number" id="quantity-input" disabled>
+                    <input type="number" id="update-quantity-input">
                   </div>
                   <div class="price-section">
                     <label for="price">Price (LKR) :</label>
-                    <input type="text" id="price-input" disabled>
+                    <input type="text" id="update-price-input">
                   </div>
                   <div class="discount-section">
                     <label for="discount">Discount :</label>
-                    <input type="number" id="discount-input" disabled>
+                    <input type="number" id="update-discount-input">
                   </div>
                   <div class="expire-date-section">
                     <label for="expire-date">Expire Date :</label>
-                    <input type="date" id="expire-date-input" disabled>
+                    <input type="date" id="update-expire-date-input">
                   </div>
                 </div>
               </form>
-
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="save-btn-style update" form="update-data-form">Update Item</button>
             </div>
           </div>
         </div>
