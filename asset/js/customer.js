@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
-var form = document.getElementById("add-item-form");
+var form = document.getElementById("add-customer-form");
 var imgInput = document.getElementById("imgInput");
 var previewImage = document.getElementById("previewImage");
 var fileTooLargeAlertShown = false;
@@ -35,11 +35,11 @@ function displayModal() {
     const overlay = document.getElementById('overlay');
     overlay.style.display = 'block';
 
-    const addItemModal = new bootstrap.Modal(document.getElementById('addItemModal'));
+    const addCustomerModal = new bootstrap.Modal(document.getElementById('addCustomerModal'));
 
-    addItemModal.show();
+    addCustomerModal.show();
 
-    addItemModal._element.addEventListener('shown.bs.modal', function () {
+    addCustomerModal._element.addEventListener('shown.bs.modal', function () {
         const addItemButton = document.getElementById('add-customer');
 
         if (addItemButton) {
@@ -49,10 +49,10 @@ function displayModal() {
         }
     });
 
-    const closeButton = addItemModal._element.querySelector('.btn-close');
+    const closeButton = addCustomerModal._element.querySelector('.btn-close');
     closeButton.addEventListener('click', function () {
         overlay.style.display = 'none';
-        addItemModal.hide();
+        addCustomerModal.hide();
     });
 }
 
@@ -80,13 +80,10 @@ function displaySelectedImage() {
 }
 
 function addItem() {
-    const itemCodeInput = document.getElementById('item-code-input');
-    const itemNameInput = document.getElementById('item-name-input');
-    const categoryDropdown = document.getElementById('category-dropdown');
+    const itemCodeInput = document.getElementById('add-customer-id-input');
+    const itemNameInput = document.getElementById('customer-name-input');
     const quantityInput = document.getElementById('quantity-input');
-    const priceInput = document.getElementById('price-input');
-    const discountInput = document.getElementById('discount-input');
-    const expireDateInput = document.getElementById('expire-date-input');
+    const discountInput = document.getElementById('no-of-orders-input');
 
     // Validation 1: Check for empty fields
     if (!itemCodeInput.value || !itemNameInput.value || !categoryDropdown.value || !quantityInput.value || !priceInput.value || !discountInput.value || !expireDateInput.value || !previewImage.src) {
@@ -171,8 +168,8 @@ function addItem() {
     expireDateInput.value = '';
     previewImage.src = "../asset/images/add item img.jpg";
 
-    const addItemModal = new bootstrap.Modal(document.getElementById('addItemModal'));
-    addItemModal.hide();
+    const addCustomerModal = new bootstrap.Modal(document.getElementById('addCustomerModal'));
+    addCustomerModal.hide();
 
     // Display success alert
     alert("Item added successfully!");
@@ -211,12 +208,11 @@ function displayItems(itemsData) {
                     <h6 class="h6-title">${item.nameOfItem}</h6>
                 </div>
                 <div class="dist-bottom-row">
-                    <div class="dish-bottom-icon">
+                    <div class="customer-bottom-icon">
                         <i class="fa-solid fa-pen-to-square fa-fade" data-bs-toggle="modal" data-bs-target="#updateDataModal"></i>
                         <i class="fa-solid fa-trash-can fa-fade" data-bs-toggle="modal" onclick="showDeleteConfirmation('${item.itemId}')"></i>
                     </div>
                 </div>
-                <div class="expire-tooltip">Expires on: ${item.expireDateOfItem}</div>
             </div>
         `;
 
@@ -278,13 +274,9 @@ document.addEventListener('DOMContentLoaded', function () {
 function populateUpdateModal(item) {
     const updateDataForm = document.getElementById('update-data-form');
     const previewImage = updateDataForm.querySelector('#update-previewImage');
-    const itemCodeInput = updateDataForm.querySelector('#update-item-code-input');
-    const itemNameInput = updateDataForm.querySelector('#update-item-name-input');
-    const categoryDropdown = updateDataForm.querySelector('#update-category-dropdown');
-    const quantityInput = updateDataForm.querySelector('#update-quantity-input');
-    const priceInput = updateDataForm.querySelector('#update-price-input');
-    const discountInput = updateDataForm.querySelector('#update-discount-input');
-    const expireDateInput = updateDataForm.querySelector('#update-expire-date-input');
+    const itemCodeInput = updateDataForm.querySelector('#update-customer-id-input');
+    const itemNameInput = updateDataForm.querySelector('#update-customer-name-input');
+    const discountInput = updateDataForm.querySelector('#update-no-of-orders-input');
 
     // Check if item is defined
     if (item) {
@@ -311,13 +303,9 @@ function populateUpdateModal(item) {
 function updateItem() {
     // Retrieve updated values from the form
     const previewImage = document.getElementById('update-previewImage');
-    const itemCodeInput = document.getElementById('update-item-code-input');
-    const itemNameInput = document.getElementById('update-item-name-input');
-    const categoryDropdown = document.getElementById('update-category-dropdown');
-    const quantityInput = document.getElementById('update-quantity-input');
-    const priceInput = document.getElementById('update-price-input');
-    const discountInput = document.getElementById('update-discount-input');
-    const expireDateInput = document.getElementById('update-expire-date-input');
+    const itemCodeInput = document.getElementById('update-customer-id-input');
+    const itemNameInput = document.getElementById('update-customer-name-input');
+    const discountInput = document.getElementById('update-no-of-orders-input');
 
     // Retrieve the item ID from the update modal
     const itemId = document.getElementById('update-data-form').dataset.itemId;
