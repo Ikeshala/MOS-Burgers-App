@@ -108,7 +108,7 @@ body {
 .dashboard {
     height: max-content;
     width: 100%;
-    padding-right: 5%;
+    /* padding-right: 5%; */
     padding-left: 10%;
     padding-top: 2%;
 }
@@ -138,12 +138,12 @@ body {
 }
 
 .dashboard-content {
-    display: block ruby;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)) !important;
+    display: flex !important;
+    flex-wrap: wrap !important;
     gap: 20px;
     padding: 2rem 1rem 1rem 1rem;
     overflow-x: auto;
-    max-height: calc(100vh - 150px);
+    max-height: calc(83.5vh - 170px);
 }
 
 .dashboard-card {

@@ -1,35 +1,66 @@
 //Get the data-category attribute value from the clicked link
 document.addEventListener('DOMContentLoaded', function () {
+    // Get all customer links
     const customerLinks = document.querySelectorAll('.customer-link');
+
+    // Get dashboard content sections
     const dashboardContent = document.getElementById('dashboard-content');
     const historyTable = document.querySelector('.customer-table');
 
-    function showSection(category) {
-        dashboardContent.style.display = category === 'customers' ? 'block' : 'none';
-        historyTable.style.display = category === 'history' ? 'block' : 'none';
-    }
+    // Set default view to dashboardContent
+    dashboardContent.style.display = 'flex';
+    historyTable.style.display = 'none';
 
+    // Add click event listener to each customer link
     customerLinks.forEach(link => {
         link.addEventListener('click', function (event) {
+            // Prevent the default behavior of the link
             event.preventDefault();
 
-            customerLinks.forEach(link => link.classList.remove('active'));
-            link.classList.add('active');
+            // Get the data-category attribute value
+            const category = link.getAttribute('data-category');
 
-            showSection(link.getAttribute('data-category'));
+            // Hide both sections by default
+            dashboardContent.style.display = 'none';
+            historyTable.style.display = 'none';
+
+            // Deactivate all links
+            customerLinks.forEach(link => link.classList.remove('active'));
+
+            // Remove the history-display class to reset the display property
+            dashboardContent.classList.remove('history-display');
+
+            // Show the selected section based on the data-category attribute
+            if (category === 'customers') {
+                dashboardContent.style.display = 'flex';
+            } else if (category === 'history') {
+                // Add a custom class to override the display style
+                dashboardContent.classList.add('history-display');
+                historyTable.style.display = 'block';
+            }
+
+            // Activate the clicked link
+            link.classList.add('active');
         });
     });
-
-    const defaultLink = document.querySelector('.customer-link.active');
-    showSection(defaultLink.getAttribute('data-category'));
 });
+
+
+
+
+
+
+
+
+
+
 
 
 var form = document.getElementById("add-customer-form");
 var imgInput = document.getElementById("imgInput");
 var previewImage = document.getElementById("previewImage");
 var fileTooLargeAlertShown = false;
-var itemsData = [];
+var customerData = [];
 
 function displayModal() {
     const overlay = document.getElementById('overlay');
@@ -40,11 +71,11 @@ function displayModal() {
     addCustomerModal.show();
 
     addCustomerModal._element.addEventListener('shown.bs.modal', function () {
-        const addItemButton = document.getElementById('add-customer');
+        const addCustomerButton = document.getElementById('add-customer');
 
-        if (addItemButton) {
-            addItemButton.addEventListener('click', function () {
-                addItem();
+        if (addCustomerButton) {
+            addCustomerButton.addEventListener('click', function () {
+                addCustomer();
             });
         }
     });
@@ -79,103 +110,78 @@ function displaySelectedImage() {
     }
 }
 
-function addItem() {
-    const itemCodeInput = document.getElementById('add-customer-id-input');
-    const itemNameInput = document.getElementById('customer-name-input');
-    const quantityInput = document.getElementById('quantity-input');
-    const discountInput = document.getElementById('no-of-orders-input');
+function addCustomer() {
+    const customerIdInput = document.getElementById('add-customer-id-input');
+    const customerNameInput = document.getElementById('customer-name-input');
+    const noOfOrdersInput = document.getElementById('no-of-orders-input');
 
     // Validation 1: Check for empty fields
-    if (!itemCodeInput.value || !itemNameInput.value || !categoryDropdown.value || !quantityInput.value || !priceInput.value || !discountInput.value || !expireDateInput.value || !previewImage.src) {
+    if (!customerIdInput.value || !customerNameInput.value || !noOfOrdersInput.value || !previewImage.src) {
         alert("Please fill in all fields, including selecting an image!");
         return;
     }
 
-    // Validation 2: Convert codeOfItem to uppercase if it starts with a lowercase 'b'
-    const itemCode = itemCodeInput.value.trim();
-    if (itemCode.charAt(0) === 'b') {
-        itemCodeInput.value = itemCode.toUpperCase();
-    }
-
-    // Validation 3: Check codeOfItem format (B followed by 4 digits)
-    const codeRegex = /^B\d{4}$/;
-    if (!codeRegex.test(itemCodeInput.value)) {
-        alert("Invalid item code format. Code should start with 'B' followed by 4 digits.");
+    // Validation 2: Check customer ID format (beginning with '0' and total 10 digits)
+    const customerIdRegex = /^0\d{9}$/;
+    if (!customerIdRegex.test(customerIdInput.value)) {
+        alert("Invalid customer phone number.");
         return;
     }
 
-    // Validation 4: Check quantityOfItem is a positive number
-    const quantity = parseFloat(quantityInput.value);
-    if (isNaN(quantity) || quantity < 0) {
-        alert("Quantity should be a positive number.");
+    // Validation 3: Check if customer ID is unique
+    if (customerData.some(customer => customer.idOfCustomer === customerIdInput.value)) {
+        alert("Customer ID already exists.");
         return;
     }
 
-    // Validation 5: Format priceOfItem as currency
-    const price = parseFloat(priceInput.value).toFixed(2);
-    if (isNaN(price)) {
-        alert("Price should be a number.");
-        return;
-    }
-    priceInput.value = price;
-
-    // Validation 6: Check discountOfItem is between 0 and 100
-    const discount = parseFloat(discountInput.value);
-    if (isNaN(discount) || discount < 0 || discount > 100) {
-        alert("Discount should be between 0 and 100.");
+    // Validation 4: Check number of orders is a positive number
+    const noOfOrders = parseFloat(noOfOrdersInput.value);
+    if (isNaN(noOfOrders) || noOfOrders <= 0) {
+        alert("Number of orders must be a positive number.");
         return;
     }
 
-    // Validation 7: Check expireDateOfItem is not a previous date
-    const currentDate = new Date();
-    const expireDate = new Date(expireDateInput.value);
-    if (expireDate < currentDate) {
-        alert("Expiration date cannot be a previous date.");
+    // Validation 5: Check customerNameInput contains only letters and spaces
+    const customerName = customerNameInput.value.trim();
+    if (!/^[a-zA-Z\s]+$/.test(customerName)) {
+        alert("Customer name can only contain letters and spaces.");
         return;
     }
 
-    // Validation 8: Check categoryOfItem is selected
-    if (categoryDropdown.selectedIndex === 0) {
-        alert("Please select a category.");
+    // Validation 6: Check if previewImage is empty
+    if (!previewImage.src || previewImage.src === "") {
+        alert("Please select an image!");
         return;
     }
 
-    const itemId = generateUniqueId();
+    const custId = generateUniqueId();
 
-    const newItem = {
-        itemId: itemId,
-        codeOfItem: itemCodeInput.value,
-        nameOfItem: itemNameInput.value,
-        categoryOfItem: categoryDropdown.value,
-        quantityOfItem: quantity,
-        priceOfItem: price,
-        discountOfItem: discount,
-        expireDateOfItem: expireDateInput.value,
+    const newCustomer = {
+        custId: custId,
+        idOfCustomer: customerIdInput.value,
+        nameOfCustomer: customerNameInput.value,
+        totalOrdersOfCustomer: noOfOrders,
         picture: previewImage.src
     };
 
-    itemsData.push(newItem);
+    customerData.push(newCustomer);
 
-    displayItems(itemsData);
+    displayCustomers(customerData);
 
     // Reset form controls individually
-    itemCodeInput.value = '';
-    itemNameInput.value = '';
-    categoryDropdown.value = '';
-    quantityInput.value = '';
-    priceInput.value = '';
-    discountInput.value = '';
-    expireDateInput.value = '';
-    previewImage.src = "../asset/images/add item img.jpg";
+    customerIdInput.value = '';
+    customerNameInput.value = '';
+    noOfOrdersInput.value = '';
+    previewImage.src = "../asset/images/add customer.jpg";
 
     const addCustomerModal = new bootstrap.Modal(document.getElementById('addCustomerModal'));
     addCustomerModal.hide();
 
     // Display success alert
-    alert("Item added successfully!");
+    alert("Customer added successfully!");
 }
 
-function displayItems(itemsData) {
+function displayCustomers(customerData) {
     const dashboardContent = document.getElementById('dashboard-content');
     if (!dashboardContent) {
         console.error("Dashboard content element not found!");
@@ -185,32 +191,32 @@ function displayItems(itemsData) {
     // Clear the existing content
     dashboardContent.innerHTML = '';
 
-    itemsData.forEach(item => {
+    customerData.forEach(customer => {
         const card = document.createElement('div');
         card.className = 'dashboard-card';
-        card.setAttribute('data-item-id', item.itemId);
+        card.setAttribute('data-cust-id', customer.custId);
 
         card.innerHTML = `
-            <img src="${item.picture}" alt="" class="card-image">
+            <img src="${customer.picture}" alt="" class="card-image">
             <div class="card-detail">
-                <div class="no-of-orders">${item.discountOfItem}%
-                <i class="fa-solid fa-ranking-star fa-bounce"></i>
+                <div class="no-of-orders">${customer.totalOrdersOfCustomer}
+                <i class="fa-solid fa-bag-shopping fa-shake"></i>
                 </div>  
                 <div class="customer-info">
                     <ul>
                         <li>
-                            <p>stock</p>
-                            <b>${item.quantityOfItem}</b>
+                            <p>Customer ID</p>
+                            <b>${customer.idOfCustomer}</b>
                         </li>
                     </ul>
                 </div>
                 <div class="customer-name-line">
-                    <h6 class="h6-title">${item.nameOfItem}</h6>
+                    <h6 class="h6-title">${customer.nameOfCustomer}</h6>
                 </div>
                 <div class="dist-bottom-row">
                     <div class="customer-bottom-icon">
                         <i class="fa-solid fa-pen-to-square fa-fade" data-bs-toggle="modal" data-bs-target="#updateDataModal"></i>
-                        <i class="fa-solid fa-trash-can fa-fade" data-bs-toggle="modal" onclick="showDeleteConfirmation('${item.itemId}')"></i>
+                        <i class="fa-solid fa-trash-can fa-fade" data-bs-toggle="modal" onclick="showDeleteConfirmation('${customer.custId}')"></i>
                     </div>
                 </div>
             </div>
@@ -227,20 +233,20 @@ imgInput.addEventListener('change', displaySelectedImage);
 
 form.addEventListener('submit', (e) => {
     e.preventDefault();
-    addItem();
+    addCustomer();
 });
 
-function showDeleteConfirmation(itemId) {
-    const confirmation = confirm("Do you want to delete this item?");
+function showDeleteConfirmation(custId) {
+    const confirmation = confirm("Do you want to delete this customer?");
     if (confirmation) {
-        deleteItem(itemId);
+        deleteItem(custId);
     }
 }
 
-function deleteItem(itemId) {
-    const updatedItemsData = itemsData.filter(item => item.itemId !== itemId);
-    itemsData = updatedItemsData;
-    displayItems(updatedItemsData);
+function deleteItem(custId) {
+    const updatedItemsData = customerData.filter(customer => customer.custId !== custId);
+    customerData = updatedItemsData;
+    displayCustomers(updatedItemsData);
 }
 
 function generateUniqueId() {
@@ -254,11 +260,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Check if the clicked element is the update icon
         if (target.classList.contains('fa-pen-to-square')) {
-            const itemId = target.closest('.dashboard-card').dataset.category.split(' ')[1];
-            const selectedItem = itemsData.find(item => item.itemId === itemId);
+            const custId = target.closest('.dashboard-card').dataset.category.split(' ')[1];
+            const selectedCustomer = customerData.find(customer => customer.custId === custId);
 
             // Populate the update modal with existing data
-            populateUpdateModal(selectedItem);
+            populateUpdateModal(selectedCustomer);
         }
     });
 
@@ -266,171 +272,114 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('update-data-form').addEventListener('submit', function (e) {
         e.preventDefault();
 
-        updateItem();
+        updateCustomer();
     });
 });
 
 // Function to populate the update modal with existing data
-function populateUpdateModal(item) {
+function populateUpdateModal(customer) {
     const updateDataForm = document.getElementById('update-data-form');
     const previewImage = updateDataForm.querySelector('#update-previewImage');
-    const itemCodeInput = updateDataForm.querySelector('#update-customer-id-input');
-    const itemNameInput = updateDataForm.querySelector('#update-customer-name-input');
-    const discountInput = updateDataForm.querySelector('#update-no-of-orders-input');
+    const customerIdInput = updateDataForm.querySelector('#update-customer-id-input');
+    const customerNameInput = updateDataForm.querySelector('#update-customer-name-input');
+    const noOfOrdersInput = updateDataForm.querySelector('#update-no-of-orders-input');
 
-    // Check if item is defined
-    if (item) {
+    // Check if customer is defined
+    if (customer) {
         // Populate the input fields with existing data
-        updateDataForm.dataset.itemId = item.itemId;
-        itemCodeInput.value = item.codeOfItem || '';
-        itemNameInput.value = item.nameOfItem || '';
-        categoryDropdown.value = item.categoryOfItem || '';
-        quantityInput.value = item.quantityOfItem || '';
-        priceInput.value = item.priceOfItem || '';
-        discountInput.value = item.discountOfItem || '';
-        expireDateInput.value = item.expireDateOfItem || '';
-        previewImage.src = item.picture || '';
+        updateDataForm.dataset.custId = customer.custId;
+        customerIdInput.value = customer.idOfCustomer || '';
+        customerNameInput.value = customer.nameOfCustomer || '';
+        noOfOrdersInput.value = customer.totalOrdersOfCustomer || '';
+        previewImage.src = customer.picture || '';
 
         // Show the update modal
         const updateDataModal = new bootstrap.Modal(document.getElementById('updateDataModal'));
         updateDataModal.show();
     } else {
-        console.error("Selected item is undefined.");
+        console.error("Selected customer is undefined.");
     }
 }
 
-// Function to update the item
-function updateItem() {
+// Function to update the customer
+function updateCustomer() {
     // Retrieve updated values from the form
     const previewImage = document.getElementById('update-previewImage');
-    const itemCodeInput = document.getElementById('update-customer-id-input');
-    const itemNameInput = document.getElementById('update-customer-name-input');
-    const discountInput = document.getElementById('update-no-of-orders-input');
+    const customerIdInput = document.getElementById('update-customer-id-input');
+    const customerNameInput = document.getElementById('update-customer-name-input');
+    const noOfOrdersInput = document.getElementById('update-no-of-orders-input');
 
-    // Retrieve the item ID from the update modal
-    const itemId = document.getElementById('update-data-form').dataset.itemId;
+    // Retrieve the customer ID from the update modal
+    const custId = document.getElementById('update-data-form').dataset.custId;
 
-    // Find the index of the item in the itemsData array
-    const itemIndex = itemsData.findIndex(item => item.itemId === itemId);
+    // Find the index of the customer in the customerData array
+    const customerIndex = customerData.findIndex(customer => customer.custId === custId);
 
-    if (itemIndex !== -1) {
-        // Get the existing item
-        const existingItem = itemsData[itemIndex];
+    if (customerIndex !== -1) {
+        // Get the existing customer
+        const existingCustomer = customerData[customerIndex];
 
         // Create an object to store updated values
         const updatedValues = {};
 
         // Compare and store updated values
-        if (itemCodeInput.value.trim() !== String(existingItem.codeOfItem).trim()) {
-            updatedValues.codeOfItem = itemCodeInput.value.trim();
-        }
-
-        if (itemNameInput.value !== String(existingItem.nameOfItem).trim()) {
-            updatedValues.nameOfItem = itemNameInput.value;
-        }
-
-        if (categoryDropdown.value !== String(existingItem.categoryOfItem).trim()) {
-            updatedValues.categoryOfItem = categoryDropdown.value;
-        }
-
-        const newQuantity = parseFloat(quantityInput.value);
-        if (!isNaN(newQuantity) && newQuantity !== parseFloat(existingItem.quantityOfItem)) {
-            updatedValues.quantityOfItem = newQuantity;
-        }
-
-        const newPrice = parseFloat(priceInput.value);
-        if (!isNaN(newPrice) && newPrice !== parseFloat(existingItem.priceOfItem)) {
-            updatedValues.priceOfItem = newPrice.toFixed(2);
-        }
-
-        const newDiscount = parseFloat(discountInput.value);
-        if (!isNaN(newDiscount) && newDiscount !== parseFloat(existingItem.discountOfItem)) {
-            updatedValues.discountOfItem = newDiscount;
-        }
-
-        const newExpireDate = new Date(expireDateInput.value);
-        if (!isNaN(newExpireDate.getTime()) && newExpireDate.getTime() !== new Date(existingItem.expireDateOfItem).getTime()) {
-            updatedValues.expireDateOfItem = expireDateInput.value;
-        }
-
-        // Validation 1: Check item code format (B followed by 4 digits)
-        if (updatedValues.codeOfItem) {
-            const itemCode = updatedValues.codeOfItem.trim();
-            if (!/^B\d{4}$/.test(itemCode)) {
-                alert("Invalid item code format. Code should start with 'B' followed by 4 digits.");
+        if (customerIdInput.value.trim() !== String(existingCustomer.idOfCustomer).trim()) {
+            // Validation 1: Check customer ID format (beginning with '0' and total 10 digits)
+            const customerIdRegex = /^0\d{9}$/;
+            if (!customerIdRegex.test(customerIdInput.value)) {
+                alert("Invalid customer ID format. It should start with '0' followed by 9 digits.");
                 return;
             }
-        }
 
-        // Validation 2: Check quantity is a positive number
-        if (updatedValues.quantityOfItem) {
-            const quantity = updatedValues.quantityOfItem;
-            if (isNaN(quantity) || quantity < 0) {
-                alert("Quantity should be a positive number.");
+            // Validation 2: Check if customer ID is unique
+            if (customerData.some(customer => customer.idOfCustomer === customerIdInput.value && customer.custId !== custId)) {
+                alert("Customer ID already exists. Please choose a different one.");
                 return;
             }
+
+            updatedValues.idOfCustomer = customerIdInput.value.trim();
         }
 
-        // Validation 3: Format price as currency
-        if (updatedValues.priceOfItem) {
-            const price = parseFloat(updatedValues.priceOfItem);
-            if (isNaN(price)) {
-                alert("Price should be a number.");
+        if (customerNameInput.value !== String(existingCustomer.nameOfCustomer).trim()) {
+            // Validation 3: Check customerNameInput contains only letters and spaces
+            const customerName = customerNameInput.value.trim();
+            if (!/^[a-zA-Z\s]+$/.test(customerName)) {
+                alert("Customer name can only contain letters and spaces.");
                 return;
             }
+
+            updatedValues.nameOfCustomer = customerNameInput.value;
         }
 
-        // Validation 4: Check discount is between 0 and 100
-        if (updatedValues.discountOfItem) {
-            const discount = updatedValues.discountOfItem;
-            if (isNaN(discount) || discount < 0 || discount > 100) {
-                alert("Discount should be between 0 and 100.");
+        const newTotalOrders = parseFloat(noOfOrdersInput.value);
+        if (!isNaN(newTotalOrders) && newTotalOrders !== parseFloat(existingCustomer.totalOrdersOfCustomer)) {
+            // Validation 4: Check number of orders is a positive number
+            if (newTotalOrders <= 0) {
+                alert("Number of orders must be a positive number.");
                 return;
             }
-        }
-
-        // Validation 5: Check expire date is not a previous date
-        if (updatedValues.expireDateOfItem) {
-            const currentDate = new Date();
-            const expireDate = new Date(updatedValues.expireDateOfItem);
-            if (expireDate < currentDate) {
-                alert("Expiration date cannot be a previous date.");
-                return;
-            }
-        }
-
-        // Validation 6: Check category is selected
-        if (updatedValues.categoryOfItem) {
-            const category = updatedValues.categoryOfItem.trim();
-            if (category === "") {
-                alert("Please select a category.");
-                return;
-            }
+            updatedValues.totalOrdersOfCustomer = newTotalOrders;
         }
 
         // Check if any values have changed
         if (Object.keys(updatedValues).length > 0) {
             // Update only the fields that have changed
             const updatedItem = {
-                itemId: itemId,
-                codeOfItem: updatedValues.codeOfItem || existingItem.codeOfItem,
-                nameOfItem: updatedValues.nameOfItem || existingItem.nameOfItem,
-                categoryOfItem: updatedValues.categoryOfItem || existingItem.categoryOfItem,
-                quantityOfItem: updatedValues.quantityOfItem || existingItem.quantityOfItem,
-                priceOfItem: updatedValues.priceOfItem || existingItem.priceOfItem,
-                discountOfItem: updatedValues.discountOfItem || existingItem.discountOfItem,
-                expireDateOfItem: updatedValues.expireDateOfItem || existingItem.expireDateOfItem,
-                picture: existingItem.picture // Keep the original picture
+                custId: custId,
+                idOfCustomer: updatedValues.idOfCustomer || existingCustomer.idOfCustomer,
+                nameOfCustomer: updatedValues.nameOfCustomer || existingCustomer.nameOfCustomer,
+                totalOrdersOfCustomer: updatedValues.totalOrdersOfCustomer || existingCustomer.totalOrdersOfCustomer,
+                picture: existingCustomer.picture // Keep the original picture
             };
 
-            // Update the item in the itemsData array
-            itemsData[itemIndex] = updatedItem;
+            // Update the customer in the customerData array
+            customerData[customerIndex] = updatedItem;
 
-            // Display updated items
-            displayItems(itemsData);
+            // Display updated customers
+            displayCustomers(customerData);
 
             // Display success alert
-            alert("Item updated successfully!");
+            alert("Customer updated successfully!");
 
             // Hide the update modal
             const updateDataModal = new bootstrap.Modal(document.getElementById('updateDataModal'));
@@ -444,7 +393,7 @@ function updateItem() {
             updateDataModal.hide();
         }
     } else {
-        alert("Item not found for updating.");
+        alert("Customer not found for updating.");
 
         // Hide the update modal
         const updateDataModal = new bootstrap.Modal(document.getElementById('updateDataModal'));
@@ -458,10 +407,10 @@ document.addEventListener('click', function (event) {
 
     // Check if the clicked element is the update icon
     if (target.classList.contains('fa-pen-to-square')) {
-        const itemId = target.closest('.dashboard-card').dataset.category.split(' ')[1];
-        const selectedItem = itemsData.find(item => item.itemId === itemId);
+        const custId = target.closest('.dashboard-card').dataset.category.split(' ')[1];
+        const selectedCustomer = customerData.find(customer => customer.custId === custId);
 
         // Populate the update modal with existing data
-        populateUpdateModal(selectedItem);
+        populateUpdateModal(selectedCustomer);
     }
 });

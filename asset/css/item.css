@@ -46,15 +46,6 @@
     border-color: var(--secondry-color);
 }
 
-.dashboard-content {
-    display: block ruby;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)) !important;
-    gap: 20px;
-    padding: 2rem 1rem 1rem 1rem;
-    overflow-x: auto;
-    max-height: calc(100vh - 150px);
-}
-
 .add-item {
     position: absolute;
     margin-right: 1%;

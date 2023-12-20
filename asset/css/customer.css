@@ -52,20 +52,16 @@
     color: var(--secondry-color);
 }
 
-.dashboard-content {
-    display: block ruby;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)) !important;
-    gap: 20px;
-    padding: 2rem 1rem 1rem 1rem;
-    overflow-x: auto;
-    max-height: calc(100vh - 150px);
-}
-
 .customer-name-line {
     padding: 0 3px;
     border-bottom: 2px solid rgb(83 57 44 / 30%);
     margin: 10px 15px 0px;
 }
+
+.dashboard-content.history-display {
+    display: none !important;
+}
+
 
 .customer-name-line .h6-title {
     text-transform: capitalize;
@@ -117,12 +113,12 @@
     flex: 1;
     padding-left: 10%;
     padding-right: 10%;
-    
+
 }
 
 .customer-info ul li:last-child {
     text-align: center;
-    
+
 }
 
 
