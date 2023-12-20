@@ -23,7 +23,7 @@
     font-weight: bold;
 }
 
-.fa-ranking-star {
+.no-of-orders i {
     color: #0C356A !important;
 }
 
@@ -60,6 +60,82 @@
     overflow-x: auto;
     max-height: calc(100vh - 150px);
 }
+
+.customer-name-line {
+    padding: 0 3px;
+    border-bottom: 2px solid rgb(83 57 44 / 30%);
+    margin: 10px 15px 0px;
+}
+
+.customer-name-line .h6-title {
+    text-transform: capitalize;
+    margin-bottom: 10px;
+    font-family: 'Kotta One', serif;
+    font-weight: bold;
+    color: var(--main-color);
+    transition: 0.3s;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.customer-info ul,
+.dist-bottom-row ul {
+    display: ruby-base-container;
+    justify-content: space-between;
+    text-align: left;
+}
+
+.customer-info ul li p {
+    font-size: 14px;
+    font-family: 'Kotta One', sans-serif;
+    color: var(--main-color);
+    margin-bottom: 2px;
+    margin-top: 5px;
+}
+
+.customer-info ul li b {
+    font-weight: 600;
+}
+
+.customer-info,
+.dist-bottom-row {
+    margin-bottom: .8rem;
+    padding: 0 30px;
+}
+
+.customer-info {
+    border-top: 2px solid rgb(83 57 44 / 30%);
+    margin: 10px 15px 10px;
+    margin-top: 10px;
+    color: var(--text-color);
+}
+
+.customer-info ul li {
+    display: inline-block;
+    flex: 1;
+    padding-left: 10%;
+    padding-right: 10%;
+    
+}
+
+.customer-info ul li:last-child {
+    text-align: center;
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 .add-customer {
     position: absolute;

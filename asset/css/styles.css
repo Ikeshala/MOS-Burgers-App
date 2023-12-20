@@ -221,7 +221,7 @@ body {
 
 .dish-info ul li:last-child {
     text-align: center;
-    border-left: 2px solid rgb(204 204 204 / 30%);
+    border-left: 2px solid rgb(83 57 44 / 30%);
 }
 
 .dist-bottom-row ul li:last-child {
@@ -245,8 +245,8 @@ body {
 }
 
 .dish-info {
-    border-bottom: 2px solid rgb(204 204 204 / 30%);
-    margin: 10px 0 0px;
+    border-bottom: 2px solid rgb(83 57 44 / 30%);
+    margin: 10px 15px 0px;
     padding-bottom: 3px;
     color: var(--text-color);
 }

@@ -198,24 +198,19 @@ function displayItems(itemsData) {
             <div class="card-detail">
                 <div class="no-of-orders">${item.discountOfItem}%
                 <i class="fa-solid fa-ranking-star fa-bounce"></i>
-                </div>
-                <div class="dish-title">
-                    <h6 class="h6-title">${item.nameOfItem}</h6>
-                </div>
-                <div class="dish-info">
+                </div>  
+                <div class="customer-info">
                     <ul>
-                        <li>
-                            <p>code</p>
-                            <b>${item.codeOfItem}</b>
-                        </li>
                         <li>
                             <p>stock</p>
                             <b>${item.quantityOfItem}</b>
                         </li>
                     </ul>
                 </div>
+                <div class="customer-name-line">
+                    <h6 class="h6-title">${item.nameOfItem}</h6>
+                </div>
                 <div class="dist-bottom-row">
-                    Rs. ${item.priceOfItem}
                     <div class="dish-bottom-icon">
                         <i class="fa-solid fa-pen-to-square fa-fade" data-bs-toggle="modal" data-bs-target="#updateDataModal"></i>
                         <i class="fa-solid fa-trash-can fa-fade" data-bs-toggle="modal" onclick="showDeleteConfirmation('${item.itemId}')"></i>
