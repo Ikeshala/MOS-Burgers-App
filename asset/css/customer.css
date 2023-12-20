@@ -1,0 +1,377 @@
+/* item section */
+:root {
+    --main-color: #53392C;
+    --secondry-color: #E8720C;
+    --text-color: #944507;
+    --second-text-color: #ededed;
+}
+
+.customer-dashboard {
+    height: max-content;
+    width: 100%;
+    padding-right: 200px;
+    padding-right: 5%;
+    padding-left: 10%;
+    padding-top: 2%;
+}
+
+.no-of-orders {
+    margin-top: .5rem;
+    font-size: 14px;
+    margin-bottom: 3px;
+    color: var(--main-color);
+    font-weight: bold;
+}
+
+.fa-ranking-star {
+    color: #0C356A !important;
+}
+
+.customer-menu-bar {
+    display: inline-flex;
+    gap: 5px;
+    overflow-x: auto;
+    border-radius: 50px;
+    background-color: rgba(232, 114, 12, 0.9);
+}
+
+.customer-menu-bar a {
+    text-decoration: none;
+    text-align: center;
+    border-radius: 50px;
+    min-width: 550px;
+    padding: .5rem 0;
+    font-size: 18px;
+    color: var(--second-text-color);
+    font-family: 'Kavoon', sans-serif;
+}
+
+.customer-menu-bar a:hover,
+.customer-menu-bar a.active {
+    background-color: var(--second-text-color);
+    color: var(--secondry-color);
+}
+
+.dashboard-content {
+    display: block ruby;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)) !important;
+    gap: 20px;
+    padding: 2rem 1rem 1rem 1rem;
+    overflow-x: auto;
+    max-height: calc(100vh - 150px);
+}
+
+.add-customer {
+    position: absolute;
+    margin-right: 1%;
+    margin-top: 1%;
+    top: 10px;
+    right: 10px;
+    width: 8%;
+    height: 8%;
+}
+
+.add-customer img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.add-customer img:hover {
+    background: linear-gradient(145deg, #2c1103, #E8720C);
+}
+
+.item-container {
+    width: 340px !important;
+    min-height: 100%;
+    position: absolute;
+    display: none;
+    top: 0;
+    right: 0;
+    padding: .5rem 1.5rem;
+    background-color: rgba(232, 114, 12, 0.8);
+    z-index: 3;
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(145, 144, 144, 0.1);
+    color: var(--second-text-color);
+    font-family: 'Kotta One', sans-serif;
+}
+
+.add-customer {
+    position: absolute;
+    margin-right: 1%;
+    margin-top: 1%;
+    top: 10px;
+    right: 10px;
+    width: 8%;
+    height: 8%;
+}
+
+.add-customer img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+#add-customer {
+    display: inherit;
+}
+
+.item-header {
+    display: inline;
+}
+
+.item-header h4 {
+    padding: 10px 0;
+    font-family: 'Kavoon', sans-serif;
+    color: var(--second-text-color);
+    font-size: 20px;
+}
+
+.item-pic {
+    width: 70px !important;
+    height: 13px !important;
+    /* object-fit:fill; */
+    border-radius: 50%;
+}
+
+.dist-bottom-row {
+    font-size: 16px;
+    font-family: 'Jua', serif;
+    color: var(--main-color);
+    padding-top: 5px;
+}
+
+.dish-bottom-icon {
+    display: ruby;
+    width: 16px;
+    height: 16px;
+    color: #ffffff;
+    transition: 0.3s;
+}
+
+.fa-pen-to-square {
+    color: #1A5D1A;
+    padding-right: 4%;
+    padding-left: 7%;
+}
+
+.fa-trash-can {
+    color: #B80000;
+}
+
+#overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(4px);
+}
+
+.modal-backdrop {
+    display: none !important;
+}
+
+.modal-header {
+    background-color: var(--secondry-color) !important;
+    color: var(--second-text-color) !important;
+    font-family: 'Kavoon', sans-serif;
+    font-size: 14px !important;
+    height: 45px !important;
+}
+
+.modal-body {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+}
+
+.modal-body form {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 10;
+    font-family: 'Kotta One', sans-serif;
+    font-size: 14px;
+}
+
+.modal-body form .imgHolder {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    margin-right: 20px;
+    align-items: center;
+}
+
+.imgHolder:hover .upload {
+    display: flex;
+}
+
+.modal-body form .input-field {
+    flex-basis: 68%;
+    border-left: 5px groove var(--secondry-color);
+    padding-left: 20px;
+}
+
+.imgHolder .upload {
+    position: absolute;
+    display: block;
+    bottom: 0;
+    width: 100%;
+    height: 100px;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    gap: 30%;
+}
+
+.imgHolder .upload input {
+    display: none;
+}
+
+.upload i {
+    color: var(--secondry-color);
+    font-size: 35px;
+    align-items: center;
+    background: var(--second-text-color);
+    border-radius: 50%;
+    align-items: flex-end !important;
+}
+
+.input-field>div {
+    width: 100%;
+    display: inline-block;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 3%;
+}
+
+.input-field>div label::after {
+    content: "*";
+    color: red;
+}
+
+.input-field>div select,
+#expire-date-input {
+    width: 100%;
+    height: 26px;
+}
+
+.input-field>div input {
+    border: none;
+    outline: none;
+    border-bottom: 2px solid var(--main-color);
+    background: transparent;
+}
+
+.modal-footer button {
+    height: 40px;
+    width: 120px;
+    border-radius: 10px;
+    background: var(--secondry-color);
+    color: var(--second-text-color);
+    font-family: 'Kavoon', sans-serif;
+    font-size: 14px;
+}
+
+.modal-footer {
+    height: 50px !important;
+    padding: 0 !important;
+}
+
+.modal-footer button:hover {
+    color: var(--secondry-color);
+    background: var(--second-text-color);
+    border: 2px solid var(--secondry-color);
+}
+
+#readDataModal form.input-field div input {
+    color: #000;
+    font-size: 18px;
+}
+
+.table thead th {
+    background-color: rgba(232, 114, 12, 0.8);
+    color: var(--second-text-color);
+    font-weight: bolder;
+    border: 2px solid var(--second-text-color);
+    font-family: 'Kotta One', sans-serif;
+    font-size: 17px;
+}
+
+.table tr td {
+    vertical-align: middle;
+    color: var(--second-text-color);
+    background-color: rgba(232, 114, 12, 0.8);
+    font-weight: 500;
+    border-bottom: 1.5px solid var(--second-text-color);
+    border-top: 1.5px solid var(--second-text-color);
+    border-left: 2px solid var(--second-text-color);
+    border-right: 2px solid var(--second-text-color);
+    font-family: 'Kotta One', sans-serif;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media (max-width: 767px) {
+    .heading {
+        font-size: x-large;
+    }
+
+    .moto {
+        font-size: small;
+    }
+
+    .vertical-navbar {
+        width: 100%;
+        padding-top: 10px;
+        order: 2;
+    }
+
+    .navbar-link {
+        margin-top: 10px;
+    }
+
+    .add-customer {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        width: 30px;
+        height: 30px;
+    }
+}
