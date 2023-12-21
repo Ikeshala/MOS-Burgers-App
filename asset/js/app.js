@@ -1,142 +1,92 @@
-// Display cards based on selected category
 document.addEventListener('DOMContentLoaded', function () {
     const menuLinks = document.querySelectorAll('.dashboad-menu a');
     const dashboardCards = document.querySelectorAll('.dashboard-card');
 
+    // Display cards based on selected category
     menuLinks.forEach(link => {
         link.addEventListener('click', function (event) {
             event.preventDefault();
-
             const selectedCategory = this.textContent.toLowerCase().trim();
 
             dashboardCards.forEach(card => {
-                card.style.display = 'none';
-            });
-
-            dashboardCards.forEach(card => {
                 const cardCategory = card.dataset.category.toLowerCase().trim();
-
-                if (selectedCategory === 'all' || selectedCategory === cardCategory) {
-                    card.style.display = 'block';
-                }
+                card.style.display = (selectedCategory === 'all' || selectedCategory === cardCategory) ? 'block' : 'none';
             });
         });
     });
 });
 
-//search functionality, allowing search for items by code or name
-function toggleSearch() {
-    var searchBar = document.getElementById('search-bar');
-    var currentDisplayStyle = window.getComputedStyle(searchBar).getPropertyValue('display');
 
-    searchBar.style.display = currentDisplayStyle === 'none' ? 'block' : 'none';
-}
+// Search item by name and code
+// Define dashboardCards
+let dashboardCards;
 
+// Fetch dashboardCards 
+document.addEventListener('DOMContentLoaded', function () {
+    dashboardCards = document.querySelectorAll('.dashboard-card');
+});
+
+// Rest of code, including the searchItems function
 function searchItems() {
-    var searchInput = document.getElementById('search-input').value.toLowerCase().trim();
-    var dashboardCards = document.querySelectorAll('.dashboard-card');
-    var found = false;
+    const inputText = document.getElementById('search-input').value.toLowerCase();
+    const cardContainer = document.getElementById('dashboard-cards');
+    let found = false; // Variable to check if any matching item is found
 
-    dashboardCards.forEach(card => {
-        const cardTitle = card.querySelector('.h6-title').textContent.toLowerCase();
-        const cardCode = card.querySelector('.dish-info b').textContent.toLowerCase();
+    if (dashboardCards && dashboardCards.length > 0) {
+        dashboardCards.forEach(card => {
+            const cardText = card.innerText.toLowerCase();
 
-        if (cardTitle.includes(searchInput) || cardCode.includes(searchInput)) {
-            card.style.display = 'block';
-            found = true;
-        } else {
-            card.style.display = 'none';
+            if (cardText.includes(inputText)) {
+                card.style.display = 'block';
+                found = true; // Set found to true if a matching item is found
+            } else {
+                card.style.display = 'none';
+            }
+        });
+
+        if (!found) {
+            // If no matching item is found, display an alert
+            alert('No matching items found.');
         }
-    });
-
-    if (!found) {
-        alert('Item not found!');
-        history.go(0);
     }
 }
 
-//display cart-container click on cart-link & close cart-container click on close-cart function
+window.toggleSearch = function () {
+    const searchBar = document.getElementById('search-bar');
+    
+    if (searchBar.style.display === 'none' || searchBar.style.display === '') {
+        searchBar.style.display = 'block';
+        document.getElementById('search-input').focus();
+    } else {
+        searchBar.style.display = 'none';
+    }
+};
+
+
+// show and hide modal according to the click event of the "Cart" link
+// show and hide modal according to the click event of the "Cart" link
 document.addEventListener('DOMContentLoaded', function () {
-    document.getElementById('cart-link').addEventListener('click', function (event) {
-        event.preventDefault();
+    // Generate order ID
+    let orderIdCounter = 1;
 
-        var cartContainer = document.querySelector('.cart-container');
-        var closeButton = document.getElementById('close-cart');
+    function generateOrderId() {
+        const orderId = `MOS${String(orderIdCounter).padStart(5, '0')}`;
+        orderIdCounter++;
+        return orderId;
+    }
 
-        if (cartContainer.style.display === 'none' || cartContainer.style.display === '') {
-            cartContainer.style.display = 'block';
-            closeButton.style.display = 'block';
-        } else {
-            cartContainer.style.display = 'none';
-            closeButton.style.display = 'none';
-        }
-    });
+    const generatedOrderId = generateOrderId();
+    document.querySelector('.genereted-id').textContent = generatedOrderId;
 
-    document.getElementById('close-cart').addEventListener('click', function () {
-        var cartContainer = document.querySelector('.cart-container');
-        var closeButton = document.getElementById('close-cart');
+    // Function to toggle the cart modal
+    function toggleCart() {
+        const cartModal = new bootstrap.Modal(document.getElementById('cartModal'));
+        cartModal.toggle();
+    }
 
-        cartContainer.style.display = 'none';
-        closeButton.style.display = 'none';
+    // Attach the toggleCart function to the click event of the "Cart" link
+    document.getElementById('cart-link').addEventListener('click', toggleCart);
 
-        history.go(0);
-    });
+    // You can also close the cart modal when clicking on the close button
+    document.getElementById('close-cart').addEventListener('click', toggleCart);
 });
-
-
-// generate order ID
-let orderIdCounter = 1;
-
-function generateOrderId() {
-    const orderId = `MOS${String(orderIdCounter).padStart(5, '0')}`;
-    orderIdCounter++;
-    return orderId;
-}
-
-const generatedOrderId = generateOrderId();
-document.querySelector('.genereted-id').textContent = generatedOrderId;
-
-
-// Adjust the size of the dashboard based on the cart-container's active state
-document.addEventListener('DOMContentLoaded', function () {
-    var cartContainer = document.querySelector('.cart-container');
-    var closeButton = document.getElementById('close-cart');
-    var dashboard = document.querySelector('.dashboard');
-    var dashboardMenu = document.querySelector('.dashboad-menu');
-
-    document.getElementById('cart-link').addEventListener('click', function (event) {
-        event.preventDefault();
-
-        cartContainer.classList.toggle('active');
-        closeButton.style.display = cartContainer.classList.contains('active') ? 'block' : 'none';
-        dashboard.style.width = cartContainer.classList.contains('active') ? 'calc(100% - 340px)' : '100%';
-        dashboardMenu.style.width = cartContainer.classList.contains('active') ? 'calc(100%)' : '100%';
-
-        if (!cartContainer.classList.contains('active')) {
-            cartContainer.style.display = 'none';
-        } else {
-            cartContainer.style.display = 'block';
-        }
-    });
-
-    document.getElementById('close-cart').addEventListener('click', function () {
-        cartContainer.classList.remove('active');
-        closeButton.style.display = 'none';
-        dashboard.style.width = '100%';
-        dashboardMenu.style.width = '100%';
-        history.go(0);
-    });
-
-    var navbarLinks = document.querySelectorAll('.navbar-link');
-    navbarLinks.forEach(link => {
-        link.addEventListener('click', function () {
-            cartContainer.classList.remove('active');
-            closeButton.style.display = 'none';
-            dashboard.style.width = '100%';
-            dashboardMenu.style.width = '100%';
-            cartContainer.style.display = 'none';
-        });
-    });
-});
-
-

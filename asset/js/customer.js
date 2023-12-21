@@ -43,6 +43,32 @@ document.addEventListener('DOMContentLoaded', function () {
             link.classList.add('active');
         });
     });
+
+
+    document.addEventListener('DOMContentLoaded', function () {
+        // Add an event listener to the document to handle update icon clicks
+        document.addEventListener('click', function (event) {
+            const target = event.target;
+
+            // Check if the clicked element is the update icon
+            if (target.classList.contains('fa-pen-to-square')) {
+                const custId = target.closest('.dashboard-card').dataset.custId;
+                const selectedCustomer = customerData.find(customer => customer.custId === custId);
+
+
+                // Populate the update modal with existing data
+                populateUpdateModal(selectedCustomer);
+            }
+        });
+
+        // Add an event listener to the update button in the update modal form
+        document.getElementById('update-data-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            updateCustomer();
+        });
+    });
+
 });
 
 
@@ -188,42 +214,56 @@ function displayCustomers(customerData) {
         return;
     }
 
-    // Clear the existing content
-    dashboardContent.innerHTML = '';
-
     customerData.forEach(customer => {
-        const card = document.createElement('div');
-        card.className = 'dashboard-card';
-        card.setAttribute('data-cust-id', customer.custId);
+        // Check if the card already exists in the dashboardContent
+        const existingCard = document.querySelector(`.dashboard-card[data-cust-id="${customer.custId}"]`);
 
-        card.innerHTML = `
-            <img src="${customer.picture}" alt="" class="card-image">
-            <div class="card-detail">
-                <div class="no-of-orders">${customer.totalOrdersOfCustomer}
-                <i class="fa-solid fa-bag-shopping fa-shake"></i>
-                </div>  
-                <div class="customer-info">
-                    <ul>
-                        <li>
-                            <p>Customer ID</p>
-                            <b>${customer.idOfCustomer}</b>
-                        </li>
-                    </ul>
-                </div>
-                <div class="customer-name-line">
-                    <h6 class="h6-title">${customer.nameOfCustomer}</h6>
-                </div>
-                <div class="dist-bottom-row">
-                    <div class="customer-bottom-icon">
-                        <i class="fa-solid fa-pen-to-square fa-fade" data-bs-toggle="modal" data-bs-target="#updateDataModal"></i>
-                        <i class="fa-solid fa-trash-can fa-fade" data-bs-toggle="modal" onclick="showDeleteConfirmation('${customer.custId}')"></i>
+        if (existingCard) {
+            // Update the content of the existing card
+            const cardImage = existingCard.querySelector('.card-image');
+            const noOfOrders = existingCard.querySelector('.no-of-orders');
+            const customerId = existingCard.querySelector('.customer-info b');
+            const customerName = existingCard.querySelector('.h6-title');
+
+            cardImage.src = customer.picture;
+            noOfOrders.textContent = customer.totalOrdersOfCustomer;
+            customerId.textContent = customer.idOfCustomer;
+            customerName.textContent = customer.nameOfCustomer;
+        } else {
+            // If the card doesn't exist, create a new one
+            const card = document.createElement('div');
+            card.className = 'dashboard-card';
+            card.dataset.custId = customer.custId;
+
+            card.innerHTML = `
+                <img src="${customer.picture}" alt="" class="card-image">
+                <div class="card-detail">
+                    <div class="no-of-orders">${customer.totalOrdersOfCustomer}
+                        <i class="fa-solid fa-bag-shopping fa-shake"></i>
+                    </div>  
+                    <div class="customer-info">
+                        <ul>
+                            <li>
+                                <p>Customer ID</p>
+                                <b>${customer.idOfCustomer}</b>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="customer-name-line">
+                        <h6 class="h6-title">${customer.nameOfCustomer}</h6>
+                    </div>
+                    <div class="dist-bottom-row">
+                        <div class="customer-bottom-icon">
+                            <i class="fa-solid fa-pen-to-square fa-fade" data-bs-toggle="modal" data-bs-target="#updateDataModal"></i>
+                            <i class="fa-solid fa-trash-can fa-fade" data-bs-toggle="modal" onclick="showDeleteConfirmation('${customer.custId}')"></i>
+                        </div>
                     </div>
                 </div>
-            </div>
-        `;
+            `;
 
-        // Append the card to the dashboardContent
-        dashboardContent.appendChild(card);
+            // Append the card to the dashboardContent
+            dashboardContent.appendChild(card);
+        }
     });
 }
 
@@ -253,28 +293,7 @@ function generateUniqueId() {
     return '_' + Math.random().toString(36).substr(2, 9);
 }
 
-document.addEventListener('DOMContentLoaded', function () {
-    // Add an event listener to the document to handle update icon clicks
-    document.addEventListener('click', function (event) {
-        const target = event.target;
 
-        // Check if the clicked element is the update icon
-        if (target.classList.contains('fa-pen-to-square')) {
-            const custId = target.closest('.dashboard-card').dataset.category.split(' ')[1];
-            const selectedCustomer = customerData.find(customer => customer.custId === custId);
-
-            // Populate the update modal with existing data
-            populateUpdateModal(selectedCustomer);
-        }
-    });
-
-    // Add an event listener to the update button in the update modal form
-    document.getElementById('update-data-form').addEventListener('submit', function (e) {
-        e.preventDefault();
-
-        updateCustomer();
-    });
-});
 
 // Function to populate the update modal with existing data
 function populateUpdateModal(customer) {
@@ -407,7 +426,7 @@ document.addEventListener('click', function (event) {
 
     // Check if the clicked element is the update icon
     if (target.classList.contains('fa-pen-to-square')) {
-        const custId = target.closest('.dashboard-card').dataset.category.split(' ')[1];
+        const custId = target.closest('.dashboard-card').dataset.custId;
         const selectedCustomer = customerData.find(customer => customer.custId === custId);
 
         // Populate the update modal with existing data

@@ -22,10 +22,7 @@
   <div class="bg-responsive col-auto">
     <div class="overlay-rectangle row-cols-auto">
 
-      <!-- Cart button -->
-      <a href="#" class="cart-link" onclick="toggleCart()" id="cart-link">
-        <img src="./asset/images/cart.png" alt="Cart" id="cart-image">
-      </a>
+
 
       <!-- Vertical Navbar -->
       <div class="vertical-navbar">
@@ -33,19 +30,19 @@
           <i class="fa-solid fa-magnifying-glass fa-shake"></i>
           Search
         </a>
-        <a href="/index.html" class="navbar-link">
+        <a href="/index.html" class="navbar-link" onclick="return handleLinkClick('/index.html');">
           <i class="fa-solid fa-house-chimney fa-beat-fade"></i>
           Home
         </a>
-        <a href="/views/items.html" class="navbar-link">
+        <a href="/views/items.html" class="navbar-link" onclick="return handleLinkClick('/views/items.html');">
           <i class="fa-solid fa-burger fa-beat-fade"></i>
           Items
         </a>
-        <a href="/views/customers.html" class="navbar-link">
+        <a href="/views/customers.html" class="navbar-link" onclick="return handleLinkClick('/views/customers.html');">
           <i class="fa-solid fa-users fa-beat-fade"></i>
           Customers
         </a>
-        <a href="/views/reports.html" class="navbar-link">
+        <a href="/views/reports.html" class="navbar-link" onclick="handleLinkClick('/views/reports.html', event);">
           <i class="fa-solid fa-file-invoice fa-beat-fade"></i>
           Reports
         </a>
@@ -56,7 +53,7 @@
 
         <div class="header">
           <!-- Search bar -->
-          <div class="search-bar" id="search-bar" style="display: none;">
+          <div class="search-bar" id="search-bar">
             <input type="text" id="search-input" placeholder="Search by item code or name">
             <i class="fa-solid fa-magnifying-glass fa-beat-fade search-icon" onclick="searchItems()"></i>
           </div>
@@ -64,6 +61,11 @@
           <!-- title & moto -->
           <h1 class="heading">MOS Burgers</h1>
           <h6 class="moto">Happiness in every bite...</h6>
+
+          <!-- Cart button -->
+          <a href="#" class="cart-link" id="cart-link">
+            <img src="./asset/images/cart.png" alt="Cart" id="cart-image">
+          </a>
         </div>
 
         <div class="dashboad-menu">
@@ -85,13 +87,13 @@
                 <i class='bx bxs-discount bx-tada'></i>
               </div>
               <div class="dish-title">
-                <h6 class="h6-title">Classic Burger (Large)</h6>
+                <h6 class="h6-title card-name">Classic Burger (Large)</h6>
               </div>
               <div class="dish-info">
                 <ul>
                   <li>
                     <p>code</p>
-                    <b>B1001</b>
+                    <b class="card-code">B1001</b>
                   </li>
                   <li>
                     <p>stock</p>
@@ -307,87 +309,94 @@
         </div>
       </div>
 
-      <!-- order-dashboard -->
-      <div class="cart-container active">
-        <div class="order-header">
-          <div class="title-cart">
-            <h4>Current Order</h4>
+      <!-- cart modal form -->
+      <div class="modal" tabindex="0" id="cartModal">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header header-style">
+              <h5 class="modal-title">Current Order</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body body-style">
+
+              <form action="#" id="cart-form">
+                <div class="customer-pic">
+                  <label for="select-customer">Order ID :</label>
+                  <label for="genereted-id" class="genereted-id"></label>
+                  <img class="customer-img" src="./asset/images/cust 1.webp" alt="" width="100" height="50">
+                </div>
+
+                <div class="customer-id">
+                  <label for="select-customer">Customer ID :</label>
+                  <input type="text" id="customer-id-input" placeholder="Phone number">
+                </div>
+                <div class="customer-name">
+                  <label for="lbl-customer-name">Customer Name :</label>
+                  <input type="text" id="auto-display-name">
+                </div>
+
+                <div class="order-wrapper">
+
+                  <div class="order-card">
+                    <img class="order-image" src="./asset/images/Classic Burger (Large).jpg" alt="">
+                    <div class="order-detail">
+                      <p>Classic Burger (Large)</p>
+                      <i class="fa-solid fa-xmark fa-fade">
+                      </i><input type="text" value="1">
+                    </div>
+
+                    <div class="order-detail">
+                      <h4 class="item-cost">Rs. 2500.00</h4>
+                      <i class="fa-solid fa-trash-can fa-shake"></i>
+                    </div>
+                  </div>
+
+                  <div class="order-card">
+                    <img class="order-image" src="./asset/images/Classic Burger (Regular).jpg" alt="">
+                    <div class="order-detail">
+                      <p>Classic Burger (Regular)</p>
+                      <i class="fa-solid fa-xmark fa-fade">
+                      </i><input type="text" value="10">
+                    </div>
+
+                    <div class="order-detail">
+                      <h4 class="item-cost">Rs. 2500.00</h4>
+                      <i class="fa-solid fa-trash-can fa-shake"></i>
+                    </div>
+                  </div>
+
+                  <div class="order-card">
+                    <img class="order-image" src="./asset/images/Pepsi (330ml) .jpg" alt="">
+                    <div class="order-detail">
+                      <p>Pepsi (330ml)</p>
+                      <i class="fa-solid fa-xmark fa-fade">
+                      </i><input type="text" value="7">
+                    </div>
+
+                    <div class="order-detail">
+                      <h4 class="item-cost">Rs. 2500.00</h4>
+                      <i class="fa-solid fa-trash-can fa-shake"></i>
+                    </div>
+                  </div>
+                </div>
+
+                <hr class="divider-top">
+                <div class="order-total">
+                  <h6>Sub Total : <span>Rs. 2500.00</span></h6>
+                  <h6>Discount : <span>Rs. 1000.00</span></h6>
+                </div>
+
+                <hr class="divider-bottom">
+                <div class="order-total">
+                  <h6>Total : <span>Rs. 1500.00</span></h6>
+                </div>
+
+                <button class="checkout" id="btn-style">Checkout</button>
+                <button class="clear-cart" id="btn-style">Clear Cart</button>
+              </form>
+            </div>
           </div>
-          <div class="customer-pic">
-            <img src="./asset/images/cust 1.webp" alt="">
-            <i class="fa-solid fa-circle-xmark" id="close-cart"></i>
-          </div>
         </div>
-        <div class="order-id">
-          <label for="genereted-id" class="genereted-id"></label>
-        </div>
-        <div class="customer-id">
-          <label for="select-customer">Customer ID :</label>
-          <input type="text" id="customer-id-input" placeholder="Phone number">
-        </div>
-        <div class="customer-name">
-          <label for="lbl-customer-name">Customer Name :</label>
-          <input type="text" id="auto-display-name">
-        </div>
-
-        <div class="order-wrapper">
-
-          <div class="order-card">
-            <img class="order-image" src="./asset/images/Classic Burger (Large).jpg" alt="">
-            <div class="order-detail">
-              <p>Classic Burger (Large)</p>
-              <i class="fa-solid fa-xmark fa-fade">
-              </i><input type="text" value="1">
-            </div>
-
-            <div class="order-detail">
-              <h4 class="item-cost">Rs. 2500.00</h4>
-              <i class="fa-solid fa-trash-can fa-shake"></i>
-            </div>
-          </div>
-
-          <div class="order-card">
-            <img class="order-image" src="./asset/images/Classic Burger (Regular).jpg" alt="">
-            <div class="order-detail">
-              <p>Classic Burger (Regular)</p>
-              <i class="fa-solid fa-xmark fa-fade">
-              </i><input type="text" value="10">
-            </div>
-
-            <div class="order-detail">
-              <h4 class="item-cost">Rs. 2500.00</h4>
-              <i class="fa-solid fa-trash-can fa-shake"></i>
-            </div>
-          </div>
-
-          <div class="order-card">
-            <img class="order-image" src="./asset/images/Pepsi (330ml) .jpg" alt="">
-            <div class="order-detail">
-              <p>Pepsi (330ml)</p>
-              <i class="fa-solid fa-xmark fa-fade">
-              </i><input type="text" value="7">
-            </div>
-
-            <div class="order-detail">
-              <h4 class="item-cost">Rs. 2500.00</h4>
-              <i class="fa-solid fa-trash-can fa-shake"></i>
-            </div>
-          </div>
-        </div>
-
-        <hr class="divider-top">
-        <div class="order-total">
-          <h6>Sub Total : <span>Rs. 2500.00</span></h6>
-          <h6>Discount : <span>Rs. 1000.00</span></h6>
-        </div>
-
-        <hr class="divider-bottom">
-        <div class="order-total">
-          <h6>Total : <span>Rs. 1500.00</span></h6>
-        </div>
-
-        <button class="checkout" id="btn-style">Checkout</button>
-        <button class="clear-cart" id="btn-style">Clear Cart</button>
       </div>
     </div>
   </div>
