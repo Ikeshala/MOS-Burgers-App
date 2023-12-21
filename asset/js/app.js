@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         });
     });
+    
 });
 
 
@@ -89,4 +90,91 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // You can also close the cart modal when clicking on the close button
     document.getElementById('close-cart').addEventListener('click', toggleCart);
+});
+
+
+//  generate a receipt for the order
+document.addEventListener('DOMContentLoaded', function () {
+    // Function to generate a receipt in PDF format
+    function generateReceipt() {
+        // Create a document definition for pdfmake
+        const docDefinition = {
+            content: [
+                { text: 'MOS Burgers', style: 'header' },
+                { text: 'Happiness in every bite...', style: 'moto' },
+                { text: `Date: ${new Date().toLocaleDateString()}`, style: 'subheader' },
+                { text: '' }, // Empty line
+
+                // Add order details to the PDF
+                { text: `Order ID: ${document.querySelector('.genereted-id').textContent}`, style: 'subheader' },
+                { text: `Order Total: ${document.querySelector('.order-total span').textContent}`, style: 'subheader' },
+                { text: '' }, // Empty line
+                { text: '' }, // Empty line
+                { text: 'Order Details :', style: 'details' },
+                { text: '' }, // Empty line
+
+                // Add order items
+                {
+                    table: {
+                        widths: ['*', '*', '*'],
+                        body: [
+                            ['Item', 'Quantity', 'Cost'],
+                            ['Classic Burger (Large)', '1', 'Rs. 2500.00'],
+                            ['Classic Burger (Regular)', '10', 'Rs. 2500.00'],
+                            ['Pepsi (330ml)', '7', 'Rs. 2500.00'],
+                            // Add more rows as needed
+                        ],
+                    },
+                },
+                { text: '' }, // Empty line
+                { text: 'Thank you for your order!', style: 'thankYouMessage' },
+            ],
+            styles: {
+                header: {
+                    fontSize: 18,
+                    alignment: 'center',
+                    bold: true,
+                    margin: [0, 0, 0, 10], // Margin bottom
+                },
+                moto: {
+                    fontSize: 12,
+                    alignment: 'center',
+                    margin: [0, 0, 0, 5], // Margin bottom
+                },
+                details: {
+                    fontSize: 12,
+                    bold: true,
+                    italics: true,
+                    margin: [0, 0, 0, 5], // Margin bottom
+                },
+                subheader: {
+                    fontSize: 12,
+                    margin: [0, 0, 0, 5], // Margin bottom
+                },
+                thankYouMessage: {
+                    fontSize: 14,
+                    bold: true,
+                    alignment: 'center',
+                    margin: [0, 20, 0, 0], // Margin top
+                },
+            },
+        };
+
+        // Generate the PDF
+        pdfMake.createPdf(docDefinition).download('receipt.pdf', function () {
+            // This code will be executed when the download is complete
+            // Close the modal
+            const cartModal = new bootstrap.Modal(document.getElementById('cartModal'));
+            cartModal.toggle(); // Use toggle instead of hide
+        });
+    }
+
+    // Attach the generateReceipt function to the click event of the element with class "checkout"
+    const checkoutButtons = document.querySelectorAll('.checkout');
+    checkoutButtons.forEach(button => {
+        button.addEventListener('click', function () {
+            // Call the generateReceipt function when a button with class "checkout" is clicked
+            generateReceipt();
+        });
+    });
 });
